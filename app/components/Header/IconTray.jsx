@@ -78,10 +78,7 @@ const Account = ({ user }) => {
               {user ? (
                 <>
                   <Image
-                    src={
-                      user?.image ||
-                      `http://localhost:3000/api/og/avatar?avatar=${user?.name}`
-                    }
+                    src={user?.image || `/api/og/avatar?avatar=${user?.name}`}
                     width={30}
                     className="object-cover rounded-full"
                     height={30}
