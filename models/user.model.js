@@ -27,6 +27,11 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    status: {
+      type: String,
+      required: true,
+      default: "active",
+    },
     dob: {
       type: Date,
     },

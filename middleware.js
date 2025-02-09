@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { authPages } from "./middlewares/auth.middleware";
+import { authPages, privatePages } from "./middlewares/auth.middleware";
 
 export async function middleware(req) {
   const { pathname } = new URL(req.url);
@@ -11,12 +11,14 @@ export async function middleware(req) {
     case pathname.startsWith("/login"): {
       return authPages(req);
     }
-
+    case pathname.startsWith("/account"): {
+      return privatePages(req);
+    }
     default:
       return NextResponse.next();
   }
 }
 
 export const config = {
-  matcher: ["/register", "/login"],
+  matcher: ["/register", "/login", "/account"],
 };

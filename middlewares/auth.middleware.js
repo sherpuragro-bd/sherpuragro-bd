@@ -9,3 +9,12 @@ export const authPages = async (req) => {
 
   return NextResponse.next();
 };
+
+export const privatePages = async (req) => {
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  return NextResponse.next();
+};

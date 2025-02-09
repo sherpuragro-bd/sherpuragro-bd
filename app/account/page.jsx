@@ -1,3 +1,3 @@
-export default function page() {
-  return <>first</>;
+export default function Overview() {
+  return <>Overview</>;
 }
