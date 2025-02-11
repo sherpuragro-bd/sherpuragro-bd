@@ -9,7 +9,7 @@ export default async function layout({ children }) {
       {!user?.isActive && <AccountValidation />}
       <section className="flex justify-center pt-10">
         <div className="w-full max-w-primary gap-10 flex-col md:flex-row px-5 flex">
-          <div className="w-full md:w-3/12">
+          <div className="w-full md:w-4/12 xl:w-3/12">
             <AccountSidebar />
           </div>
           <div className="w-full md:w-9/12 flex justify-center items-center">

@@ -9,7 +9,7 @@ export default function Search() {
         <div className="px-5 flex items-center border py-[5px] focus-within:border-primary/50 transition-all rounded-md">
           <input
             type="text"
-            placeholder="পর্ণ খুজুন"
+            placeholder="পণ্য খুজুন"
             className="placeholder:font-extralight bg-transparent py-1 w-full font-extralight"
           />
           <button>

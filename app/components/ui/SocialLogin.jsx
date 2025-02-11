@@ -24,7 +24,7 @@ export default function SocialLogin() {
       <button
         onClick={() => handleGoogleSignIn("google")}
         type="button"
-        className="bg-white flex gap-5 justify-center border hover:bg-stone-100 focus-within:ring-1 ring-offset-2 ring-primary/50 focus-within:border-transparent rounded-md  focus-within:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 transition-all px-5 py-2 w-full"
+        className="bg-white flex gap-5 justify-center border hover:bg-stone-100 focus-within:ring-1 ring-offset-2 ring-primary/50 focus-within:border-transparent rounded-md  focus-within:-mt-2 hover:shadow-xl hover:shadow-primary/10 transition-all px-5 py-2 w-full"
       >
         <FcGoogle size={20} />
         <span>গুগল </span>

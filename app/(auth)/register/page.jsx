@@ -6,7 +6,7 @@ export const metadata = {
     "রেজিস্ট্রেশন ফর্মের সমস্ত তথ্য পূরণ করুন এবং আপনার কিছু ব্যক্তিগত তথ্য প্রদান করুন।",
 };
 
-export default function page() {
+export default function Register() {
   return (
     <>
       <section className="flex justify-center">

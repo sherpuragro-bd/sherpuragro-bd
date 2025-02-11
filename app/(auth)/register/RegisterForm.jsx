@@ -138,6 +138,7 @@ export default function RegisterForm() {
         {errors.phone && <LineErro>ফোন নাম্বার ১১ ডিজিট হতে হবে</LineErro>}
 
         <InputPass
+          autoComplete="new-password"
           disabled={isRegistering}
           required={true}
           {...register("password", { required: true })}

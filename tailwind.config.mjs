@@ -19,6 +19,7 @@ export default {
       },
       fontFamily: {
         en: ["Quicksand"],
+        bn: ["liAdorNoirrit"],
       },
       borderRadius: {
         lg: "var(--radius)",
