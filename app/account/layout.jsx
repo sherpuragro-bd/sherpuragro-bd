@@ -12,7 +12,7 @@ export default async function layout({ children }) {
           <div className="w-full md:w-4/12 xl:w-3/12">
             <AccountSidebar />
           </div>
-          <div className="w-full md:w-9/12 flex justify-center items-center">
+          <div className="w-full md:w-9/12 flex justify-center items-start">
             {children}
           </div>
         </div>

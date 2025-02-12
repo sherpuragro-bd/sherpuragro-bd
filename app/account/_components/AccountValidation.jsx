@@ -13,6 +13,7 @@ import {
 import { Loader2, X } from "lucide-react";
 import OtpTimeCountDown from "./OtpTimeCountDown";
 import { useRouter } from "next/navigation";
+import Errorbox from "@/app/components/ui/Errorbox";
 
 export default function AccountValidation() {
   const router = useRouter();
@@ -20,7 +21,8 @@ export default function AccountValidation() {
   const [otpValidPopop, setotpValidPopop] = useState(false);
   const [otp, setotp] = useState();
   const [exps, setexps] = useState();
-  const [resendingOtp, setresendingOtp] = useState(false);
+  const [verifyingOtp, setverifyingOtp] = useState();
+  const [isError, setisError] = useState();
   const countdownRef = useRef();
 
   const otpLength = otp?.length || 0;
@@ -55,17 +57,25 @@ export default function AccountValidation() {
 
   const handleOtpVerification = async (e) => {
     e.preventDefault();
+
+    if (verifyingOtp) {
+      return;
+    }
+
+    setverifyingOtp(true);
     if (otpLength < 6) {
       return;
     }
 
     const res = await verifyAccount(parseInt(otp));
     if (!res.success) {
-      toast.error(res.error);
+      setisError(res.error);
+      setverifyingOtp(false);
       return;
     }
     router.refresh();
     toast.success(res.msg);
+    setverifyingOtp(false);
   };
 
   return (
@@ -93,6 +103,7 @@ export default function AccountValidation() {
                   </p>
                 </div>
               </div>
+              {isError && <Errorbox err={isError} />}
               <form
                 onSubmit={handleOtpVerification}
                 className="w-full font-en font-bold"
@@ -124,12 +135,18 @@ export default function AccountValidation() {
                 </div>
                 <button
                   type="submit"
-                  disabled={otpLength < 6}
-                  className={`font-bn font-extralight px-5 py-1 mt-5 bg-gradient-to-br w-full text-center from-primary to-primary/60 border border-primary text-white/100 rounded-md hover:opacity-90 transition-all ${
+                  disabled={otpLength < 6 || verifyingOtp}
+                  className={`font-bn flex justify-center font-extralight px-5 py-1 mt-5 bg-gradient-to-br w-full text-center from-primary to-primary/60 border border-primary text-white/100 rounded-md hover:opacity-90 transition-all ${
                     otpLength < 6 && "cursor-not-allowed opacity-80"
                   }`}
                 >
-                  ভেরিফাই করুন{" "}
+                  {verifyingOtp ? (
+                    <>
+                      <Loader2 size={24} className="animate-spin" />
+                    </>
+                  ) : (
+                    "ভেরিফাই করুন"
+                  )}
                 </button>
               </form>
             </div>
@@ -137,7 +154,7 @@ export default function AccountValidation() {
         </>
       )}
       <section className="flex justify-center w-full bg-gradient-to-br from-primary to-primary/80 py-2">
-        <div className="w-full max-w-primary gap-3 items-center flex-wrap px-5 flex justify-center">
+        <div className="w-full max-w-primary gap-3 items-center flex-wrap px-5 flex md:justify-center">
           <p className="md:text-base text-sm text-green-50 min-[580px]:flex gap-3">
             কোনো পণ্য অর্ডার করার আগে অনুগ্রহ করে আপনার অ্যাকাউন্টটি ভেরিফাই
             করুন{" "}

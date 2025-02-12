@@ -1,4 +1,5 @@
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+import { logout } from "./logout";
 
 export const loginUser = async (data) => {
   const { email, password } = data;
@@ -14,4 +15,9 @@ export const loginUser = async (data) => {
   }
 
   return { success: true, msg: "লগইন সফল হয়েছে" };
+};
+
+export const logoutUser = async () => {
+  await logout();
+  await signOut();
 };

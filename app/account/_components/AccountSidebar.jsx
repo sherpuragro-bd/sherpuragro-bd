@@ -2,7 +2,7 @@
 
 import { House, LogOut, MapPin, Settings, ShoppingBasket } from "lucide-react";
 import { SidebarLinks } from "./SidebarLink";
-import { signOut } from "next-auth/react";
+import { logoutUser } from "@/actions/login";
 
 export default function AccountSidebar() {
   return (
@@ -18,7 +18,7 @@ export default function AccountSidebar() {
         </SidebarLinks>
       ))}
       <button
-        onClick={() => signOut()}
+        onClick={async () => await logoutUser()}
         className="px-5 py-3 flex items-center border rounded-lg gap-2 transition-all"
       >
         <span className="scale-90">

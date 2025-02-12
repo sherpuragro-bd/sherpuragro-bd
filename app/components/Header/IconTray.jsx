@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/popover";
 import Image from "next/image";
 import { LogIn, LogOut, User, UserPlus } from "lucide-react";
-import { signOut } from "next-auth/react";
+import { logoutUser } from "@/actions/login";
 
 export default function IconTray({ user }) {
   return (
@@ -105,7 +105,7 @@ const Account = ({ user }) => {
                 <User size={20} strokeWidth={1} /> অ্যাকাউন্ট
               </Link>
               <button
-                onClick={async () => signOut()}
+                onClick={async () => await logoutUser()}
                 className="flex gap-3 hover:underline"
               >
                 <LogOut strokeWidth={1} size={19} className="rotate-180" />

@@ -72,7 +72,7 @@ export const sendOtp = async () => {
     } catch (error) {}
   }
 
-  const otp = Math.floor(Math.random() * 1000000);
+  const otp = Math.floor(Math.random() * 900000) + 100000;
   const tokenPayload = {
     otp,
     email: session.user.email,
@@ -123,12 +123,13 @@ export const verifyAccount = async (otpReq) => {
   try {
     const { payload } = await jwtDecrypt(otpToken, secret);
     if (payload.otp !== parseInt(otpReq)) {
-      return { success: false, error: "দুঃখিত ভুল সঠিক ওটিপি লিখুন" };
+      return { success: false, error: "দুঃখিত সঠিক ওটিপি লিখুন" };
     }
     const activeAccount = await userModel.findOneAndUpdate(
       { email: session.user.email },
       { $set: { isActive: true } }
     );
+    cookiesStore.delete("otp_Secure_Token");
     return { success: true, msg: "অ্যাকাউন্ট এক্টিভেশন সফল হয়েছে " };
   } catch (err) {
     return { success: false, error: "দুঃখিত সঠিক ওটিপি লিখুন " };

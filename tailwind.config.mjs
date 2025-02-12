@@ -10,6 +10,7 @@ export default {
     extend: {
       colors: {
         primary: "#3bb77e",
+        text: "#253d4e",
       },
       textColor: {
         1: "#253d4e",
