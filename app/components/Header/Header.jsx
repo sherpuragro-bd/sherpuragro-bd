@@ -5,9 +5,11 @@ import { getServerSession } from "next-auth";
 import LogoURI from "../../../public/img/logo.png";
 import SmLogoURI from "../../../public/img/small-logo.png";
 import Image from "next/image";
+import { getUser } from "@/actions/user";
 
 export default async function Header() {
   const session = await getServerSession();
+  const user = await getUser();
   return (
     <>
       <header className="flex justify-center border-b z-[999] bg-white relative">
@@ -29,7 +31,7 @@ export default async function Header() {
             </Link>
             <Search />
           </div>
-          <IconTray user={session?.user} />
+          <IconTray avatar={user?.image} user={session?.user} />
         </div>
       </header>
     </>

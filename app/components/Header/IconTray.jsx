@@ -12,13 +12,13 @@ import Image from "next/image";
 import { LogIn, LogOut, User, UserPlus } from "lucide-react";
 import { logoutUser } from "@/actions/login";
 
-export default function IconTray({ user }) {
+export default function IconTray({ user, avatar }) {
   return (
     <>
       <div className="flex items-center gap-5">
         <Compare />
         <Cart />
-        <Account user={user} />
+        <Account avatar={avatar} user={user} />
       </div>
     </>
   );
@@ -68,7 +68,7 @@ const Cart = ({ count = 0 }) => {
   );
 };
 
-const Account = ({ user }) => {
+const Account = ({ user, avatar }) => {
   return (
     <>
       <Popover>
@@ -78,7 +78,11 @@ const Account = ({ user }) => {
               {user ? (
                 <>
                   <Image
-                    src={user?.image || `/api/og/avatar?avatar=${user?.name}`}
+                    src={
+                      avatar ||
+                      user?.image ||
+                      `/api/og/avatar?avatar=${user?.name?.slice(0, 1)}`
+                    }
                     width={30}
                     className="object-cover rounded-full"
                     height={30}

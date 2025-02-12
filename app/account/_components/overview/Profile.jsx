@@ -10,7 +10,7 @@ export default async function Profile() {
   return (
     <>
       <div className="flex w-full p-5">
-        <div className="flex gap-5">
+        <div className="flex gap-5 max-[450px]:flex-col min-[450px]:items-center">
           <div className="min-w-[80px]">
             <Avatar avatar={user?.image} user={session.user} />
           </div>

@@ -5,14 +5,18 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Camera, Trash, Upload, X } from "lucide-react";
+import { Camera, Loader2, Trash, Upload, X } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import toast from "react-hot-toast";
+import imageCompression from "browser-image-compression";
+import { updateAvatar } from "@/actions/user";
+import { useRouter } from "next/navigation";
 
 export default function Avatar({ user, avatar }) {
+  const router = useRouter();
   const [storingImage, setstoringImage] = useState(false);
   const [scale, setscale] = useState(1);
   const [imageUrl, setImageUrl] = useState(null);
@@ -41,7 +45,16 @@ export default function Avatar({ user, avatar }) {
     const res = await fetch(dataUrl);
     const blob = await res.blob();
 
-    console.log(URL.createObjectURL(blob));
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 250,
+      useWebWorker: true,
+    };
+
+    const compressedImage = await imageCompression(blob, options);
+    const avatarUpdate = await updateAvatar(compressedImage);
+    router.refresh();
+    setImageUrl(false);
     setstoringImage(false);
   };
 
@@ -55,6 +68,7 @@ export default function Avatar({ user, avatar }) {
               height={80}
               className="rounded-full ring-4 ring-primary/60 group-hover:ring-primary cursor-pointer transition-all"
               src={
+                avatar ||
                 user?.image ||
                 `/api/og/avatar?avatar=${user?.name?.slice(0, 1)}`
               }
@@ -94,7 +108,7 @@ export default function Avatar({ user, avatar }) {
       </Popover>
       {imageUrl && (
         <section className="flex justify-center w-full h-screen overflow-y-scroll backdrop-blur-[2px] items-center fixed bg-black/30 left-0 top-0 z-[999999999999]">
-          <div className="w-fit">
+          <div className="w-8/12 md:w-fit">
             <div className="w-full flex justify-end">
               <button
                 onClick={() => setImageUrl(null)}
@@ -135,10 +149,10 @@ export default function Avatar({ user, avatar }) {
                   type="file"
                   className="hidden"
                 />
-                <div class="w-full max-w-md mx-auto">
+                <div className="w-full max-w-md mx-auto">
                   <label
-                    for="range"
-                    class="block text-sm font-light text-gray-700"
+                    htmlFor="chnageAvatar"
+                    className="block text-sm font-light text-gray-700"
                   >
                     +/-
                   </label>
@@ -166,7 +180,11 @@ export default function Avatar({ user, avatar }) {
                   onClick={getImageUrl}
                   className="flex bg-primary hover:bg-primary/60 transition-all text-white text-center justify-center cursor-pointer items-center text-sm w-full gap-3 font-extralight border p-1 px-3 rounded-md mb-3"
                 >
-                  সংরক্ষণ করুন
+                  {storingImage ? (
+                    <Loader2 size={20} className="animate-spin" />
+                  ) : (
+                    "সংরক্ষণ করুন"
+                  )}
                 </button>
               </div>
             </div>

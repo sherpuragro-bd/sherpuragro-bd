@@ -11,6 +11,10 @@ const nextConfig = {
         hostname: "platform-lookaside.fbsbx.com",
       },
       {
+        protocol: "https",
+        hostname: "ik.imagekit.io",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
       },
