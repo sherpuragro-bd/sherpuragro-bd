@@ -26,3 +26,31 @@ input[type="number"] {
 p {
   color: #737373;
 }
+
+.swal2-title {
+  color: #253d4e !important;
+  font-weight: 400;
+}
+
+.swal2-popup {
+  border-radius: 20px;
+  border: 1px solid #3bb77e47;
+  padding: 20px;
+  padding-bottom: 30px;
+}
+.swal2-styled {
+  border-radius: 10px;
+  font-weight: 400;
+}
+.swal2-confirm {
+  background: #3bb77e;
+}
+
+div#swal2-html-container {
+  color: #253d4ea1;
+  font-weight: 300;
+}
+
+.swal2-cancel {
+  background-color: #253d4e;
+}

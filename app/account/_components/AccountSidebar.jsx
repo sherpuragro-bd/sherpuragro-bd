@@ -11,6 +11,7 @@ export default function AccountSidebar() {
         <SidebarLinks
           icon={link.icon}
           link={link?.path}
+          end={"new"}
           key={index}
           href={`${link.path}`}
         >

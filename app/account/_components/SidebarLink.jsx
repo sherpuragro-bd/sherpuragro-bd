@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { forwardRef } from "react";
 
 export const SidebarLinks = forwardRef(
-  ({ link, icon, children, ...props }, ref) => {
+  ({ link, icon, end, children, ...props }, ref) => {
     const pathname = usePathname();
     const isActive = pathname === link;
     return (

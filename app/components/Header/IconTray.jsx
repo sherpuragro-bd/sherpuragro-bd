@@ -9,7 +9,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Image from "next/image";
-import { LogIn, LogOut, User, UserPlus } from "lucide-react";
+import {
+  LogIn,
+  LogOut,
+  MapPin,
+  SlidersHorizontal,
+  User,
+  UserPlus,
+} from "lucide-react";
 import { logoutUser } from "@/actions/login";
 
 export default function IconTray({ user, avatar }) {
@@ -102,11 +109,23 @@ const Account = ({ user, avatar }) => {
             </span>
           </div>
         </PopoverTrigger>
-        <PopoverContent className="shadow-none mt-3 flex flex-col z-[99999999999999999999] text-sm font-light gap-2 text-1/80 xl:mr-0 mr-5 w-[150px] border border-gray-300">
+        <PopoverContent className="shadow-none mt-3 flex flex-col z-[99999999999999999999] text-sm font-light gap-2 text-1/80 xl:mr-0 mr-5 w-[160px] border border-gray-300">
           {user ? (
             <>
               <Link href={`/account`} className="flex gap-3 hover:underline">
                 <User size={20} strokeWidth={1} /> অ্যাকাউন্ট
+              </Link>
+              <Link
+                href={`/order-tracking`}
+                className="flex gap-3 hover:underline"
+              >
+                <MapPin size={18} strokeWidth={0.8} /> অর্ডার ট্র্যাকিং
+              </Link>
+              <Link
+                href={`/account/edit-account`}
+                className="flex gap-3 hover:underline"
+              >
+                <SlidersHorizontal size={18} strokeWidth={0.8} /> আপডেট প্রোফাইল
               </Link>
               <button
                 onClick={async () => await logoutUser()}

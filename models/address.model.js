@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const addressSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
       match: [/\S+@\S+\.\S+/, "Please provide a valid email address"],
       maxlength: [255, "Email must be less than 255 characters"],
@@ -20,33 +19,28 @@ const userSchema = new mongoose.Schema(
       required: true,
       maxlength: [15, "Phone number must be at most 15 characters"],
     },
-    password: {
+    address: {
       type: String,
       required: true,
-      minlength: [6, "Password must be at least 6 characters"],
     },
-    image: {
-      type: String,
-    },
-    status: {
+    district: {
       type: String,
       required: true,
-      default: "active",
     },
-    dob: {
-      type: Date,
-    },
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
-    role: {
+    upazila: {
       type: String,
-      default: "user",
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+      lowercase: true,
+      match: [/\S+@\S+\.\S+/, "Please provide a valid email address"],
+      maxlength: [255, "Email must be less than 255 characters"],
     },
   },
   { timestamps: true }
 );
 
-export const userModel =
-  mongoose.models.User || mongoose.model("User", userSchema);
+export const AddressModel =
+  mongoose.models.Address || mongoose.model("Address", addressSchema);

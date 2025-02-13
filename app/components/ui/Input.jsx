@@ -4,9 +4,12 @@ import { Eye, EyeClosed } from "lucide-react";
 import React, { forwardRef, useState } from "react";
 
 export const Input = forwardRef(
-  ({ icon, required, label, children, ...props }, ref) => {
+  (
+    { icon, required, className, childrenClass, label, children, ...props },
+    ref
+  ) => {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-full">
         {label && (
           <label className="font-light">
             {label}{" "}
@@ -14,12 +17,12 @@ export const Input = forwardRef(
           </label>
         )}
         <input
-          className="px-5 font-extralight rounded-md py-[6px] pl-9 focus:bg-neutral-300/20 placeholder:font-extralight border border-gray-300/50 focus:border-primary/50 transition-all bg-white/80"
+          className={`px-5 font-extralight rounded-md py-[6px] pl-9 focus:bg-neutral-300/20 placeholder:font-extralight border border-gray-300/50 focus:border-primary/50 transition-all bg-white/80 ${className}`}
           ref={ref}
           {...props}
         />
-        <span className="-mt-10 w-fit scale-[0.8] ml-2">{icon}</span>
-        <span className="-mt-4">{children}</span>
+        {icon && <span className="-mt-10 w-fit scale-[0.8] ml-2">{icon}</span>}
+        <span className={`-mt-4 ${childrenClass || ""}`}>{children}</span>
       </div>
     );
   }

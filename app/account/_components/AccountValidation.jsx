@@ -153,22 +153,28 @@ export default function AccountValidation() {
           </section>
         </>
       )}
-      <section className="flex justify-center w-full bg-gradient-to-br from-primary to-primary/80 py-2">
-        <div className="w-full max-w-primary gap-3 items-center flex-wrap px-5 flex md:justify-center">
-          <p className="md:text-base text-sm text-green-50 min-[580px]:flex gap-3">
-            কোনো পণ্য অর্ডার করার আগে অনুগ্রহ করে আপনার অ্যাকাউন্টটি ভেরিফাই
-            করুন{" "}
-            <button
-              disabled={isSendingOtp}
-              onClick={handelNewOtp}
-              className={`bg-white w-fit flex items-center gap-2 hover:bg-gray-200 text-primary px-5 rounded-sm ${
-                isSendingOtp && "cursor-not-allowed"
-              }`}
-            >
-              ওটিপি পাঠান{" "}
-              {isSendingOtp && <Loader2 size={18} className="animate-spin" />}
-            </button>
-          </p>
+      <section
+        className="w-full flex m-0 justify-center bg-repeat-x"
+        style={{
+          backgroundImage:
+            "url('https://ik.imagekit.io/1xu2irsp6/default/lush-tropical-forest.webp?updatedAt=1739474973393')",
+        }}
+      >
+        <div className="w-full text-sm font-light sm:text-base backdrop-blur-[2px] text-white bg-gradient-to-br sm:text-center from-primary/80 px-5 to-primary/50 py-2">
+          কোনো পণ্য অর্ডার করার আগে অনুগ্রহ করে আপনার অ্যাকাউন্টটি ভেরিফাই করুন{" "}
+          <button
+            disabled={isSendingOtp}
+            onClick={handelNewOtp}
+            className={`px-2 bg-white/20 text-white ml-2 rounded-md ${
+              isSendingOtp && "cursor-not-allowed"
+            }`}
+          >
+            {isSendingOtp ? (
+              <span className="animate-pulse">ওটিপি পাঠানো...</span>
+            ) : (
+              "ওটিপি পাঠান"
+            )}
+          </button>
         </div>
       </section>
     </>

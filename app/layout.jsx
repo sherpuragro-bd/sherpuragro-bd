@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import "./globals.css";
 import { Quicksand } from "next/font/google";
 import localFont from "next/font/local";
+import ScrollToTop from "./components/ui/ScrolltoTop";
 
 const liAdorNoirrit = localFont({
   src: "../public/fonts/adornoirit.ttf",
@@ -21,7 +22,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${liAdorNoirrit.className} antialiased text-1 bg-white [&::-webkit-scrollbar]:w-0`}
       >
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
             },
           }}
         />
+        <ScrollToTop />
       </body>
     </html>
   );

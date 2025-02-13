@@ -14,11 +14,12 @@ export async function middleware(req) {
     case pathname.startsWith("/account"): {
       return privatePages(req);
     }
+
     default:
       return NextResponse.next();
   }
 }
 
 export const config = {
-  matcher: ["/register", "/login", "/account"],
+  matcher: ["/register", "/login", "/account/:path*"],
 };

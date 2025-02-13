@@ -39,9 +39,9 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit(handelLogin)}
-      className="w-11/12 md:w-9/12 xl:w-[500px] border border-primary/20 p-7 rounded-xl bg-primary/5"
+      className="w-full md:w-9/12 xl:w-[500px] border border-primary/20 p-7 rounded-xl bg-primary/5"
     >
-      <div className="flex gap-5">
+      <div className="flex gap-5 max-[400px]:flex-col">
         <LockIcon
           className="p-2 bg-white border text-primary rounded-md border-gray-300/50"
           size={45}

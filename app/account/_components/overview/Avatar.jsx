@@ -12,7 +12,7 @@ import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import toast from "react-hot-toast";
 import imageCompression from "browser-image-compression";
-import { updateAvatar } from "@/actions/user";
+import { updateAvatar, updateUser } from "@/actions/user";
 import { useRouter } from "next/navigation";
 
 export default function Avatar({ user, avatar }) {
@@ -20,6 +20,7 @@ export default function Avatar({ user, avatar }) {
   const [storingImage, setstoringImage] = useState(false);
   const [scale, setscale] = useState(1);
   const [imageUrl, setImageUrl] = useState(null);
+  const [removingAvatar, setremovingAvatar] = useState(false);
   const editor = useRef(null);
 
   const handleAvatarUpload = (e) => {
@@ -53,9 +54,28 @@ export default function Avatar({ user, avatar }) {
 
     const compressedImage = await imageCompression(blob, options);
     const avatarUpdate = await updateAvatar(compressedImage);
+    toast.success("প্রোফাইল ছবি যুক্ত হয়েছে");
     router.refresh();
     setImageUrl(false);
     setstoringImage(false);
+  };
+
+  const removeAvatar = async () => {
+    if (removingAvatar || !avatar) return;
+
+    setremovingAvatar(true);
+    const res = await updateUser({ image: "" });
+
+    if (!res.success) {
+      toast.error("দুঃখিত অনাআখাঙ্কিত সমস্যা");
+      setremovingAvatar(false);
+      return;
+    }
+
+    toast.success("প্রোফাইল এর ছবি রিমুভ হয়েছে");
+    router.refresh();
+    setImageUrl(null);
+    setremovingAvatar(false);
   };
 
   return (
@@ -96,6 +116,7 @@ export default function Avatar({ user, avatar }) {
             পরিবর্তন করুন
           </label>
           <button
+            onClick={removeAvatar}
             disabled={!avatar}
             className={`flex border border-transparent hover:border-neutral-800/10 rounded-md p-1 px-2 transition-all w-full items-center gap-2 ${
               !avatar && "cursor-not-allowed"
