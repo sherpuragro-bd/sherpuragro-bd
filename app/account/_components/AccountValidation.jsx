@@ -157,7 +157,7 @@ export default function AccountValidation() {
         className="w-full flex m-0 justify-center bg-repeat-x"
         style={{
           backgroundImage:
-            "url('https://ik.imagekit.io/1xu2irsp6/default/lush-tropical-forest.webp?updatedAt=1739474973393')",
+            "url('https://ik.imagekit.io/xjgs1kyel/default/lush-tropical-forest.webp?updatedAt=1739512133184')",
         }}
       >
         <div className="w-full text-sm font-light sm:text-base backdrop-blur-[2px] text-white bg-gradient-to-br sm:text-center from-primary/80 px-5 to-primary/50 py-2">

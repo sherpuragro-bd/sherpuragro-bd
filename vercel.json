@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/*": {
+      "runtime": "nodejs16.x",
+      "cors": {
+        "allowedOrigins": ["http://sherpuragro.vercel.app"]
+      }
+    }
+  }
+}

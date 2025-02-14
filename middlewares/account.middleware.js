@@ -1,15 +1,22 @@
-// import { connectToDB } from "@/lib/connectToDB";
-// import { AddressModel } from "@/models/address.model";
-// import { getServerSession } from "next-auth";
-// import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+import { NextResponse } from "next/server";
 
-// export const newAddresMiddleware = async () => {
-//   const session = await getServerSession();
+export async function NewAddressesMiddleware(req) {
+  try {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (!token)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-//   await connectToDB();
-
-//   const allAddress = await AddressModel.countDocuments();
-
-//   console.log(allAddress);
-//   return NextResponse.next();
-// };
+    const res = await fetch(
+      new URL(`/api/addressescount?user=${token.email}`, req.url)
+    );
+    const addressesCount = await res.json();
+    console.log(addressesCount);
+    if (addressesCount >= 3) {
+      return NextResponse.rewrite(new URL("/404", req.url));
+    }
+    return NextResponse.next();
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
