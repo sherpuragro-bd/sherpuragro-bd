@@ -5,12 +5,17 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
   try {
-    const AuthKey = process.env.NEXTAUTH_SECRET;
+    const authorizationHeader = req.headers.get("Authorization");
+
+    if (authorizationHeader !== process.env.JWT_SECRET) {
+      return NextResponse.json({ error: "Unauthorized user" }, { status: 401 });
+    }
+
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const params = req.nextUrl.searchParams;
     const email = params.get("user");
 
-    if (!AuthKey) {
-      return NextResponse.json("Hi");
+    if (!token?.email) {
     }
     await connectToDB();
     const addressesCount = await AddressModel.countDocuments({ author: email });

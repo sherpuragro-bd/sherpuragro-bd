@@ -8,7 +8,14 @@ export async function NewAddressesMiddleware(req) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const res = await fetch(
-      new URL(`/api/addressescount?user=${token.email}`, req.url)
+      new URL(`/api/addressescount?user=${token.email}`, req.url),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${process.env.JWT_SECRET}`,
+        },
+      }
     );
     const addressesCount = await res.json();
     console.log(addressesCount);
