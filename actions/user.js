@@ -5,9 +5,23 @@ import { uploadImage } from "@/lib/upload";
 import { AddressModel } from "@/models/address.model";
 import { userModel } from "@/models/user.model";
 import { getServerSession } from "next-auth";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const getUser = async (req) => {
+  const reqHeaders = await headers();
+  const referer = reqHeaders.get("referer");
+
+  let pathname = "";
+
+  if (referer) {
+    try {
+      pathname = new URL(referer).pathname;
+    } catch (error) {
+      console.error("Invalid referer URL:", error);
+    }
+  }
+
   const session = await getServerSession();
 
   if (!session) {
@@ -20,9 +34,15 @@ export const getUser = async (req) => {
     .select("-password")
     .lean();
 
-  if (!user?._id) {
-    return redirect("/social");
+  if (!user) {
+    return;
   }
+
+  if (user.status !== "active") {
+    redirect("/api/logout");
+    return;
+  }
+
   return { ...user };
 };
 

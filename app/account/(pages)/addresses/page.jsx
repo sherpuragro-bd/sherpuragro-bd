@@ -64,10 +64,9 @@ const NoAddress = () => {
       <Image width={300} height={300} src="/img/map.webp" alt="Map" />
       <h2 className="text-2xl">কোন ঠিকানা নেই!</h2>
       <p className="text-neutral-500">আপনি এখনও কোনও ঠিকানা যোগ করেননি।</p>
-      <span className="flex w-full h-[1px] bg-primary/40 mt-3 -mb-2"></span>
       <Link
         href={`/account/addresses/new`}
-        className="mt-5 flex text-text/60 transition-all hover:underline items-center rounded-md"
+        className="flex text-text/60 transition-all hover:underline items-center rounded-md"
       >
         নতুন ঠিকানা যোগ করুন <ChevronRight size={20} />
       </Link>

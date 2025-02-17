@@ -73,7 +73,7 @@ export default function RegisterForm() {
   return (
     <form
       onSubmit={handleSubmit(handleRegister)}
-      className="w-full md:w-9/12 xl:w-[500px] border border-primary/20 p-7 rounded-xl bg-primary/5"
+      className="w-full sm:w-8/12 md:w-7/12 xl:w-[500px] border border-primary/20 p-7 rounded-xl bg-primary/5"
     >
       <div className="flex gap-5 max-[400px]:flex-col">
         <UserPlus

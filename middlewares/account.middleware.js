@@ -18,7 +18,6 @@ export async function NewAddressesMiddleware(req) {
       }
     );
     const addressesCount = await res.json();
-    console.log(addressesCount);
     if (addressesCount >= 3) {
       return NextResponse.rewrite(new URL("/404", req.url));
     }

@@ -4,6 +4,11 @@ import AccountSidebar from "./_components/AccountSidebar";
 
 export default async function layout({ children }) {
   const user = await getUser();
+
+  if (!user?._id) {
+    return;
+  }
+
   return (
     <>
       {!user?.isActive && <AccountValidation />}

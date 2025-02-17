@@ -9,9 +9,8 @@ export const loginUser = async (data) => {
     password,
     redirect: false,
   });
-
   if (res?.error) {
-    return { success: false, error: "ভুল লগইন তথ্য" };
+    return { success: false, error: res.error };
   }
 
   return { success: true, msg: "লগইন সফল হয়েছে" };

@@ -92,7 +92,7 @@ export default function Avatar({ user, avatar }) {
                 user?.image ||
                 `/api/og/avatar?avatar=${user?.name?.slice(0, 1)}`
               }
-              alt={user?.name}
+              alt={user?.name || "Avatar"}
             />
             <span className="bg-primary -mt-5 z-30 transition-all text-white p-1 rounded-md">
               <Camera size={15} />

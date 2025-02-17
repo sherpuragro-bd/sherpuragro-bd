@@ -29,28 +29,36 @@ const handler = NextAuth({
         if (!credentials) return null;
         await connectToDB();
 
-        try {
-          const user = await userModel.findOne({ email: credentials.email });
+        const user = await userModel.findOne({ email: credentials.email });
 
-          if (!user) return null;
-
-          const passwordMatch = await bcrypt.compare(
-            credentials.password,
-            user.password
+        if (!user)
+          throw new Error(
+            "দুঃখিত আপনার প্রদান করা লগইন সকল ইনফর্মেশন সঠিক নয়। দয়া করে সঠিক ইনফর্মেশন প্রদান করুন।"
           );
-          if (!passwordMatch) return null;
 
-          return {
-            id: user._id.toString(),
-            email: user.email,
-            name: user.name,
-            phone: user.phone,
-            role: user.role,
-            avatar: user.avatar,
-          };
-        } catch (err) {
-          throw new Error("ভুল লগইন তথ্য");
+        if (user.status === "blocked") {
+          throw new Error(
+            "আপনার একাউন্ট স্থিতি স্থায়ীভাবে নিষ্ক্রিয় করা হয়েছে। আপনি লগইন করতে পারবেন না। যদি আপনি এটি নিষ্ক্রিয় করা হয়েছে বলে মনে করেন তাহলে আমাদের সাথে যোগাযোগ করুন।"
+          );
         }
+
+        const passwordMatch = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+        if (!passwordMatch)
+          throw new Error(
+            "দুঃখিত আপনার প্রদান করা লগইন সকল ইনফর্মেশন সঠিক নয়। দয়া করে সঠিক ইনফর্মেশন প্রদান করুন।"
+          );
+
+        return {
+          id: user._id.toString(),
+          email: user.email,
+          name: user.name,
+          phone: user.phone,
+          role: user.role,
+          avatar: user.avatar,
+        };
       },
     }),
   ],

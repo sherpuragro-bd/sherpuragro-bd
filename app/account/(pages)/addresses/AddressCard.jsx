@@ -16,7 +16,7 @@ export const AddressCard = ({ address }) => {
 
     Swal.fire({
       title: "আপনি ঠিকানাটি ডিলিট করতে চান?",
-      text: "আপনি যদি এই ঠিকানা টি ডিলিট করতে চান তাহলে ডিলিট বাটন টিতে প্রেস করুন আরে যদি ক্যানসেল করতে চান তাহলে বাতিল করুন বাটন এ প্রেস",
+      text: "আপনি যদি এই ঠিকানা টি ডিলিট করতে চান তাহলে ডিলিট বাটন টিতে প্রেস করুন আরে যদি ক্যানসেল করতে চান তাহলে বাতিল করুন বাটন এ প্রেস করুন",
       icon: "warning",
       showCancelButton: true,
       cancelButtonText: "বাতিল করুন",
@@ -90,19 +90,6 @@ export const AddressCard = ({ address }) => {
             )}
             ডিলিট
           </button>
-          |
-          <Link
-            href={`/account/addresses/edit/${address?._id}`}
-            className="flex text-sm gap-2 group"
-          >
-            <Pencil
-              className="group-hover:fill-green-600 duration-1000 transition-all"
-              strokeWidth={1}
-              size={18}
-              color="green"
-            />
-            ইডিট
-          </Link>
         </div>
       </div>
     </>

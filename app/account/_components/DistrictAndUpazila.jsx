@@ -6,6 +6,7 @@ export default function DistrictAndUpazila({
   setAddress,
   value,
   options,
+  defaultValue,
   ...props
 }) {
   const customFilter = (option, inputValue) => {

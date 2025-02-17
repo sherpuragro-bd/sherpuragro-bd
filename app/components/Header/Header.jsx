@@ -12,7 +12,7 @@ export default async function Header() {
   const user = await getUser();
   return (
     <>
-      <header className="flex justify-center border-b z-[999] bg-white relative">
+      <header className="flex justify-center border-b z-[9999] bg-white relative">
         <div className="w-full items-center gap-5 max-w-primary p-5 py-6 inline-flex justify-between">
           <div className="flex items-center gap-10 xl:gap-20 w-full">
             <Link href="/" className="text-3xl">
@@ -31,7 +31,11 @@ export default async function Header() {
             </Link>
             <Search />
           </div>
-          <IconTray avatar={user?.image} user={session?.user} />
+          <IconTray
+            userData={{ ...user, _id: `${user?._id}` }}
+            avatar={user?.image}
+            user={session?.user}
+          />
         </div>
       </header>
     </>

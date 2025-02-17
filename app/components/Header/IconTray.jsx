@@ -14,18 +14,19 @@ import {
   LogOut,
   MapPin,
   SlidersHorizontal,
+  Table2,
   User,
   UserPlus,
 } from "lucide-react";
 import { logoutUser } from "@/actions/login";
 
-export default function IconTray({ user, avatar }) {
+export default function IconTray({ user, avatar, userData }) {
   return (
     <>
       <div className="flex items-center gap-5">
         <Compare />
         <Cart />
-        <Account avatar={avatar} user={user} />
+        <Account userData={userData} avatar={avatar} user={user} />
       </div>
     </>
   );
@@ -61,7 +62,7 @@ const Compare = ({ count = 0 }) => {
   );
 };
 
-const Cart = ({ count = 0 }) => {
+export const Cart = ({ count = 0 }) => {
   return (
     <Link href={"/cart"} className="flex items-end gap-2">
       <div>
@@ -75,7 +76,7 @@ const Cart = ({ count = 0 }) => {
   );
 };
 
-const Account = ({ user, avatar }) => {
+const Account = ({ user, avatar, userData }) => {
   return (
     <>
       <Popover>
@@ -93,7 +94,7 @@ const Account = ({ user, avatar }) => {
                     width={30}
                     className="object-cover rounded-full"
                     height={30}
-                    alt={user?.name}
+                    alt={user?.name || "Avatar"}
                   />
                 </>
               ) : (
@@ -112,6 +113,11 @@ const Account = ({ user, avatar }) => {
         <PopoverContent className="shadow-none mt-3 flex flex-col z-[99999999999999999999] text-sm font-light gap-2 text-1/80 xl:mr-0 mr-5 w-[160px] border border-gray-300">
           {user ? (
             <>
+              {userData?.role === "admin" && (
+                <Link href={`/admin`} className="flex gap-3 hover:underline">
+                  <Table2 size={20} strokeWidth={1} /> এডমিন প্যানেল
+                </Link>
+              )}
               <Link href={`/account`} className="flex gap-3 hover:underline">
                 <User size={20} strokeWidth={1} /> অ্যাকাউন্ট
               </Link>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Quicksand } from "next/font/google";
 import localFont from "next/font/local";
 import ScrollToTop from "./components/ui/ScrolltoTop";
+import BottomBar from "./components/Header/BottomBar";
 
 const liAdorNoirrit = localFont({
   src: "../public/fonts/adornoirit.ttf",
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth">
       <body
         className={`${liAdorNoirrit.className} antialiased text-1 bg-white [&::-webkit-scrollbar]:w-0`}
-        data-new-gr-c-s-check-loaded="14.1222.0"
+        data-new-gr-c-s-check-loaded="14.1223.0"
         data-gr-ext-installed=""
       >
         <Header />
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <ScrollToTop />
+        <BottomBar />
       </body>
     </html>
   );

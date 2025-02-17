@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -31,7 +32,19 @@ export default function LoginForm() {
       router.refresh();
       return;
     } else {
-      reset(), toast.error("ভুল লগইন তথ্য");
+      reset(),
+        Swal.fire({
+          icon: "error",
+          title: "লগইন ব্যর্থ হয়েছে",
+          text: res.error,
+          confirmButtonText: "ঠিক আছে",
+          showCancelButton: true,
+          cancelButtonText: "যোগাযোগ করুন",
+        }).then((res) => {
+          if (!res.isConfirmed) {
+            router.push("/contact");
+          }
+        });
     }
     setIsLogining(false);
   };

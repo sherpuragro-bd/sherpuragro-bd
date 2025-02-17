@@ -8,9 +8,9 @@ export default function SocialLogin() {
   const handleGoogleSignIn = async (method) => {
     try {
       if (method === "google") {
-        await socialSignIn({ method: "google", callBack: "/social" });
+        await socialSignIn({ method: "google", callBack: "/account" });
       } else if (method === "facebook") {
-        await socialSignIn({ method: "facebook", callBack: "/social" });
+        await socialSignIn({ method: "facebook", callBack: "/account" });
       } else {
         return;
       }
