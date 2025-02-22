@@ -41,16 +41,23 @@ export default function SetUpAccount({ user, session }) {
         "আপনার পুরো নাম টি লিখুন এবং যদি পারেন আপনার জাতীয় পরিচয়ই পত্র অনুযায়ে নাম প্রদান করুন",
     },
     {
-      target: "#phone-field",
-      content: "Provide your active phone number.",
+      target: "#password-field",
+      content:
+        "এখানে ৬ অক্ষর এর একটি সুরক্ষিত পাসওয়ার্ড প্রদান করুন যা আপনি কাওকে দেখাতে চাননা",
     },
     {
       target: "#dob-field",
-      content: "Select your birth date.",
+      content:
+        "আপনার জাতীয় পরিচয়ই পত্র অনুজায়ে যে জন্ম তারিখ দেওা রয়েছে টা প্রদান করুন",
     },
     {
-      target: "#password-field",
-      content: "Choose a secure password for your account.",
+      target: "#phone-field",
+      content:
+        "আপনার একটি সচল মোবাইল নাম্বার প্রদান করুন যা আপনি নিয়মিত ব্যাবহার করে থাকেন এবং মনে রাখবেন মোবাইল নাম্বারটি ১১ ডিজিট এর হতেহুবে",
+    },
+    {
+      target: "#submit-button",
+      content: "আপনার সকল তথ্য প্রদান সম্পূর্ণ হলে এখানে ক্লিক করুন",
     },
   ];
 
@@ -181,6 +188,7 @@ export default function SetUpAccount({ user, session }) {
                   },
                 })}
                 id="password-field"
+                required={true}
                 icon={<Key strokeWidth={1} />}
                 autoComplete="new-password"
                 placeholder="সুরক্ষিত পাসওয়ার্ড দিন"
@@ -218,6 +226,7 @@ export default function SetUpAccount({ user, session }) {
               </PhoneInput>
             </div>
             <button
+              id="submit-button"
               disabled={isRegistering}
               type="submit"
               className={`bg-primary/80 hover:bg-primary transition-all group flex justify-center items-center gap-2 text-white px-5 w-full py-2 font-extralight rounded-md border border-primary mt-5 ${
