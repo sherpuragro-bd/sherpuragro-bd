@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Joyride from "react-joyride";
 import {
   ArrowRight,
   Calendar,
@@ -13,76 +12,28 @@ import {
 } from "lucide-react";
 import { Input, InputPass } from "../Input";
 import { PhoneInput } from "../PhoneInput";
-import { guideStyleOption } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import LineErro from "../LineErro";
 import { registerUser } from "@/actions/auth";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useNextStep } from "nextstepjs";
 
 export default function SetUpAccount({ user, session }) {
-  const [number, setNumber] = useState(""); // Initialize with an empty string
-  const [numberError, setNumberError] = useState(false);
-  const [run, setRun] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const { user: AuthUser } = session;
+  const [number, setNumber] = useState("");
+  const [numberError, setNumberError] = useState();
+  const { startNextStep } = useNextStep();
+
   const router = useRouter();
 
-  const steps = [
-    {
-      target: "body",
-      content:
-        "স্বাগতম আপনাকে দয়া করে এই সকল তর্থ প্রদান করুন। এবং আপনি চাইলে এই ইন্সট্রাকশন ফলো করতে পারেন অথবা স্কিপ করতে পারেন ",
-      placement: "center",
-    },
-    {
-      target: "#name-field",
-      content:
-        "আপনার পুরো নাম টি লিখুন এবং যদি পারেন আপনার জাতীয় পরিচয়ই পত্র অনুযায়ে নাম প্রদান করুন",
-    },
-    {
-      target: "#password-field",
-      content:
-        "এখানে ৬ অক্ষর এর একটি সুরক্ষিত পাসওয়ার্ড প্রদান করুন যা আপনি কাওকে দেখাতে চাননা",
-    },
-    {
-      target: "#dob-field",
-      content:
-        "আপনার জাতীয় পরিচয়ই পত্র অনুজায়ে যে জন্ম তারিখ দেওা রয়েছে টা প্রদান করুন",
-    },
-    {
-      target: "#phone-field",
-      content:
-        "আপনার একটি সচল মোবাইল নাম্বার প্রদান করুন যা আপনি নিয়মিত ব্যাবহার করে থাকেন এবং মনে রাখবেন মোবাইল নাম্বারটি ১১ ডিজিট এর হতেহুবে",
-    },
-    {
-      target: "#submit-button",
-      content: "আপনার সকল তথ্য প্রদান সম্পূর্ণ হলে এখানে ক্লিক করুন",
-    },
-  ];
-
-  const handleJoyrideCallback = (data) => {
-    const { status } = data;
-    if (["finished", "skipped"].includes(status)) {
-      setRun(false);
-    }
-  };
-
   useEffect(() => {
-    if (!localStorage.getItem("tourAccountSetUp")) {
-      setRun(true);
+    const canIOpen = localStorage.getItem("accountStepTour");
+    if (canIOpen !== "true") {
+      startNextStep(`accountStepTour`);
     }
   }, []);
-
-  const handleSkipAccountSetupTourGuide = (data) => {
-    const { action } = data;
-    if (action === "skip") {
-      localStorage.setItem("tourAccountSetUp", false);
-    }
-    if (action === "reset") {
-      setRun(false);
-    }
-  };
 
   const {
     register,
@@ -125,29 +76,6 @@ export default function SetUpAccount({ user, session }) {
 
   return (
     <>
-      <div className="guide">
-        {run && (
-          <Joyride
-            steps={steps}
-            run={run}
-            continuous={true}
-            showSkipButton={true}
-            callback={handleSkipAccountSetupTourGuide}
-            hideCloseButton={true}
-            styles={{
-              ...guideStyleOption,
-            }}
-            locale={{
-              back: "পিছনে",
-              close: "বন্ধ করুন",
-              last: "শেষ",
-              next: "পরবর্তী",
-              skip: "স্কিপ করুন",
-              start: "শুরু করুন",
-            }}
-          />
-        )}
-      </div>
       <section className="flex justify-center w-full">
         <div className="inline-flex justify-center py-20 pb-40 md:h-screen items-center px-5 flex-col w-full overflow-y-scroll">
           <div className="text-center pb-10 flex flex-col items-center">
@@ -159,6 +87,7 @@ export default function SetUpAccount({ user, session }) {
             <span className="w-20 h-1 rounded-xl bg-primary flex mt-5" />
           </div>
           <form
+            id="accountSetUpForm"
             onSubmit={handleSubmit(handleUserRegister)}
             className="w-11/12 sm:w-10/12 md:w-[500px]"
           >
@@ -244,7 +173,7 @@ export default function SetUpAccount({ user, session }) {
             </button>
           </form>
           <button
-            onClick={() => setRun(true)}
+            onClick={() => startNextStep("accountStepTour")}
             className="text-sky-800 underline mt-5 flex items-center gap-2"
           >
             <CircleHelp size={18} strokeWidth={2} />

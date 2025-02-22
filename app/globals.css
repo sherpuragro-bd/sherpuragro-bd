@@ -59,6 +59,12 @@ div#swal2-html-container {
 .swal2-container {
   z-index: 999999999999999 !important;
 }
-.react-joyride__beacon {
-  display: none !important;
+div[data-name="nextstep-pointer"] {
+  border-radius: 12px !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+div[data-name="nextstep-overlay"] {
+  z-index: 99999999999999999999 !important;
 }
