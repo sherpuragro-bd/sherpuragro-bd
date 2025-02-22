@@ -1,12 +1,15 @@
 import { getUser } from "@/actions/user";
 import AccountValidation from "./_components/AccountValidation";
 import AccountSidebar from "./_components/AccountSidebar";
+import SetUpAccount from "../components/ui/SetUpAccount/SetUpAccount";
+import { getServerSession } from "next-auth";
 
 export default async function layout({ children }) {
   const user = await getUser();
+  const session = await getServerSession();
 
   if (!user?._id) {
-    return;
+    return <SetUpAccount user={user} session={session} />;
   }
 
   return (

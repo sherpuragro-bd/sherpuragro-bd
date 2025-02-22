@@ -5,6 +5,7 @@
 * {
   outline: none;
   border-color: #d1d5dba0;
+  margin: 0;
 }
 
 @layer base {
@@ -57,4 +58,7 @@ div#swal2-html-container {
 
 .swal2-container {
   z-index: 999999999999999 !important;
+}
+.react-joyride__beacon {
+  display: none !important;
 }
