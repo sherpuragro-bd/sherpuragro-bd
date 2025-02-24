@@ -30,34 +30,39 @@ p {
 
 .swal2-title {
   color: #253d4e !important;
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .swal2-popup {
-  border-radius: 20px;
-  border: 1px solid #3bb77e47;
-  padding: 20px;
-  padding-bottom: 30px;
+  border-radius: 20px !important;
+  border: 1px solid #3bb77e47 !important;
+  padding: 20px !important;
+  padding-bottom: 30px !important;
 }
 .swal2-styled {
-  border-radius: 10px;
-  font-weight: 400;
+  border-radius: 10px !important;
+  font-weight: 400 !important;
 }
 .swal2-confirm {
-  background: #3bb77e;
+  background: #3bb77e !important;
 }
 
 div#swal2-html-container {
-  color: #253d4ea1;
-  font-weight: 300;
+  color: #253d4ea1 !important;
+  font-weight: 300 !important;
 }
 
 .swal2-cancel {
-  background-color: #253d4e;
+  background-color: #253d4e !important;
 }
 
 .swal2-container {
   z-index: 999999999999999 !important;
+}
+div[data-name="nextstep-card"] {
+  h2 {
+    font-weight: 500 !important;
+  }
 }
 div[data-name="nextstep-pointer"] {
   border-radius: 12px !important;

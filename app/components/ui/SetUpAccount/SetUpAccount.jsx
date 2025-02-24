@@ -24,7 +24,7 @@ export default function SetUpAccount({ user, session }) {
   const { user: AuthUser } = session;
   const [number, setNumber] = useState("");
   const [numberError, setNumberError] = useState();
-  const { startNextStep } = useNextStep();
+  const { startNextStep, closeNextStep } = useNextStep();
 
   const router = useRouter();
 
@@ -55,6 +55,7 @@ export default function SetUpAccount({ user, session }) {
       setNumberError(false);
     }
 
+    closeNextStep();
     setIsRegistering(true);
 
     const res = await registerUser({
@@ -62,6 +63,7 @@ export default function SetUpAccount({ user, session }) {
       phone: number,
       email: AuthUser?.email,
       isActive: true,
+      image: AuthUser?.image,
     });
 
     if (!res.success) {

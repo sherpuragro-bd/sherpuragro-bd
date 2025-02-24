@@ -1,15 +1,7 @@
 import { GetAllAddress } from "@/actions/user";
-import {
-  ChevronRight,
-  CirclePlus,
-  MapPin,
-  Pencil,
-  Trash,
-  XCircle,
-} from "lucide-react";
+import { ChevronRight, CirclePlus, Trash, XCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import { AddressCard } from "./AddressCard";
 
 export const metadata = {
@@ -46,9 +38,7 @@ export default async function Addresses() {
             </div>
           </Link>
           {allAddress.map((address, index) => (
-            <Suspense key={index} fallback={<>Loading</>}>
-              <AddressCard key={`address-${index}`} address={address} />
-            </Suspense>
+            <AddressCard key={`address-${index}`} address={address} />
           ))}
         </div>
       ) : (

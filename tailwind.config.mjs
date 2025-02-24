@@ -11,6 +11,7 @@ export default {
       colors: {
         primary: "#3bb77e",
         text: "#253d4e",
+        adminBg: "#151f2c",
       },
       textColor: {
         1: "#253d4e",

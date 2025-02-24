@@ -102,10 +102,14 @@ const Account = ({ user, avatar, userData }) => {
               )}
             </div>
             <span className="font-light hidden sm:block w-20 text-start !overflow-hidden">
-              {user
-                ? user?.name?.length > 8
-                  ? user?.name?.slice(0, 8) + "..."
-                  : user?.name
+              {userData?.name
+                ? userData.name.length > 8
+                  ? userData.name.slice(0, 8) + "..."
+                  : userData.name
+                : user?.name
+                ? user.name.length > 8
+                  ? user.name.slice(0, 8) + "..."
+                  : user.name
                 : "অ্যাকাউন্ট"}
             </span>
           </div>

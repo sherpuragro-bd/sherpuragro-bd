@@ -7,9 +7,11 @@ import { districtsData } from "@/public/data/District";
 import { upazilasData } from "@/public/data/Upazila";
 import { useForm } from "react-hook-form";
 import LineErro from "@/app/components/ui/LineErro";
-import { newAddress } from "@/actions/user";
+import { newAddress, revalidateAddresses } from "@/actions/user";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import AddressNewLoading from "../(pages)/addresses/new/loading";
+import Banner from "./Banner";
 
 export default function AddressNew() {
   const {
@@ -19,6 +21,7 @@ export default function AddressNew() {
     formState: { errors },
   } = useForm();
 
+  const [windowsLoaded, setwindowsLoaded] = useState(false);
   const [number, setNumber] = useState();
   const [selectedDistrict, setselectedDistrict] = useState();
   const [filteredUpazilas, setfilteredUpazilas] = useState();
@@ -44,6 +47,7 @@ export default function AddressNew() {
   }));
 
   useEffect(() => {
+    setwindowsLoaded(true);
     if (selectedDistrict?.value) {
       setselectedUpazila(null);
       const upazilasFiltered = upazilasData
@@ -93,13 +97,19 @@ export default function AddressNew() {
       toast.error(res.error);
       return;
     }
+    await revalidateAddresses();
     router.push("/account/addresses");
     router.refresh();
     toast.success(res.msg);
   };
 
+  if (!windowsLoaded) {
+    return <AddressNewLoading />;
+  }
+
   return (
     <>
+      <Banner />
       <form
         onSubmit={handleSubmit(handelNewAddress)}
         className="p-10 space-y-5 pb-14 mt-5 rounded-xl border"

@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import ScrollToTop from "./components/ui/ScrolltoTop";
 import BottomBar from "./components/Header/BottomBar";
 import StepProvider from "./components/ui/StepProvider";
+import HideWrapper from "./components/ui/HideWrapper";
 
 const liAdorNoirrit = localFont({
   src: "../public/fonts/adornoirit.ttf",
@@ -31,9 +32,12 @@ export default function RootLayout({ children }) {
         data-new-gr-c-s-check-loaded="14.1223.0"
         data-gr-ext-installed=""
       >
-        <Header />
+        <HideWrapper toHide={`/admin`}>
+          <Header />
+        </HideWrapper>
         <StepProvider>{children}</StepProvider>
         <Toaster
+          position="center-bottom"
           toastOptions={{
             style: {
               zIndex: "9999999999999999999999999 !important",
@@ -47,7 +51,9 @@ export default function RootLayout({ children }) {
           }}
         />
         <ScrollToTop />
-        <BottomBar />
+        <HideWrapper toHide={`/admin`}>
+          <BottomBar />
+        </HideWrapper>
       </body>
     </html>
   );

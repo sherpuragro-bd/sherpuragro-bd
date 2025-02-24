@@ -5,6 +5,7 @@ import { uploadImage } from "@/lib/upload";
 import { AddressModel } from "@/models/address.model";
 import { userModel } from "@/models/user.model";
 import { getServerSession } from "next-auth";
+import { revalidateTag, unstable_cache } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -91,17 +92,27 @@ export const GetAllAddress = async () => {
     return "কোন ইউজার খুঁজে পাওয়া যাইনি";
   }
 
-  await connectToDB();
-  const allAddress = await AddressModel.find({
-    author: session.user.email,
-  })
-    .sort({ createdAt: -1 })
-    .lean();
+  return getCachedAddresses(session.user.email);
+};
 
-  return allAddress.map((address) => ({
-    ...address,
-    _id: address._id.toString(),
-  }));
+const getCachedAddresses = unstable_cache(
+  async (email) => {
+    await connectToDB();
+    const allAddress = await AddressModel.find({ author: email })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    return allAddress.map((address) => ({
+      ...address,
+      _id: address._id.toString(),
+    }));
+  },
+  (email) => [`addresses`],
+  { revalidate: 1 }
+);
+
+export const revalidateAddresses = async () => {
+  revalidateTag(`addresses`);
 };
 
 export const newAddress = async (data) => {
@@ -125,7 +136,6 @@ export const newAddress = async (data) => {
 
 export const deleteAddress = async (addressId, author) => {
   const session = await getServerSession();
-  console.log(author);
   if (session?.user?.email !== author) {
     return { success: false, error: "দুঃখিত অননুমোদিত ইউসার " };
   }

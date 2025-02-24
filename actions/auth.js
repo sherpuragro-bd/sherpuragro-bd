@@ -12,7 +12,7 @@ import { emailTemplate } from "@/templates/email";
 
 export const registerUser = async (user) => {
   // Extract user details from the input
-  const { email, name, phone, password, isActive } = user;
+  const { email, name, phone, password, image, isActive } = user;
 
   // Validate user details
   if (!user || !email || !password || !phone || !name) {
@@ -39,6 +39,7 @@ export const registerUser = async (user) => {
     phone,
     password: hashedPassword,
     ...(isActive !== undefined && { isActive }),
+    ...(image !== undefined && { image }),
   });
 
   const savedUser = await newUser.save();

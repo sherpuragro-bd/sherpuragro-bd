@@ -1,8 +1,7 @@
 "use client";
 
-import { deleteAddress } from "@/actions/user";
+import { deleteAddress, revalidateAddresses } from "@/actions/user";
 import { Loader2, MapPin, Pencil, Trash } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -31,6 +30,7 @@ export const AddressCard = ({ address }) => {
       if (!res.success) {
         return toast.error(res.error);
       }
+      await revalidateAddresses();
       router.refresh();
       toast.success(res.msg);
     });

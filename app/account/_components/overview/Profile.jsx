@@ -15,9 +15,7 @@ export default async function Profile() {
             <Avatar avatar={user?.image} user={session.user} />
           </div>
           <div className="w-11/12">
-            <h2 className="text-xl font-en font-semibold">
-              {session?.user.name}
-            </h2>
+            <h2 className="text-xl">{user?.name || session?.user.name}</h2>
             <p className="font-extralight text-sm pt-1">
               আপনার অ্যাকাউন্ট ড্যাশবোর্ড থেকে আপনি আপনার{" "}
               <LinkHighLight href={`/account/orders?sort=recent`}>
