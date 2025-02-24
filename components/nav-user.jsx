@@ -42,7 +42,7 @@ export function NavUser({ user }) {
             <LogOut
               size={30}
               strokeWidth={1.5}
-              className="text-text p-[5px] bg-slate-200 rounded-sm"
+              className="text-text p-[5px] border bg-slate-100 rounded-sm"
             />
           </div>
         </SidebarMenuButton>

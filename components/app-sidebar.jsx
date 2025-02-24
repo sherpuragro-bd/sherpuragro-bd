@@ -15,7 +15,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import Image from "next/image";
@@ -62,7 +61,13 @@ export function AppSidebar({ user, ...props }) {
                         asChild
                         isActive={item.isActive}
                       >
-                        <a href={item.url}>{item.title}</a>
+                        <Link href={`/admin/${item.url}`}>
+                          {" "}
+                          {item.icon && (
+                            <item.icon color="#253d4e" strokeWidth={1.5} />
+                          )}
+                          {item.title}
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}

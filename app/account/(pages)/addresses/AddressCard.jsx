@@ -1,6 +1,7 @@
 "use client";
 
 import { deleteAddress, revalidateAddresses } from "@/actions/user";
+import { convertToBengaliNumbers } from "@/lib/utils";
 import { Loader2, MapPin, Pencil, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -61,7 +62,9 @@ export const AddressCard = ({ address }) => {
               ></path>
               <circle fill="#F42A41" cx="16" cy="17.5" r="7"></circle>
             </svg>
-            <p className="text-sm">{address?.phone?.slice(0, 11)}</p>
+            <p className="text-sm">
+              {convertToBengaliNumbers(address?.phone?.slice(0, 11))}
+            </p>
           </div>
         </div>
         <hr className="bg-sky-600/10" />

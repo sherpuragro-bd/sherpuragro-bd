@@ -6,6 +6,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import NotFound from "../not-found";
+import AdminHeader from "../components/Header/AdminHeader";
 
 export const metadata = {
   title: "এডমিন ড্যাশবোর্ড | শেরপুর এগ্রো ",
@@ -22,9 +23,7 @@ export default async function Layout({ children }) {
     <SidebarProvider>
       <AppSidebar user={user} />
       <SidebarInset>
-        <div className="md:hidden">
-          <SidebarTrigger />
-        </div>
+        <AdminHeader />
         <div className="p-5">{children}</div>
       </SidebarInset>
     </SidebarProvider>
