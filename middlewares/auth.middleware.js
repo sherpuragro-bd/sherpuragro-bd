@@ -21,3 +21,7 @@ export const privatePages = async (req, middleware) => {
 
   return NextResponse.next();
 };
+
+export const verifyAdmin = async (req) => {
+  return NextResponse.next();
+};

@@ -44,7 +44,7 @@ export const getUser = async (req) => {
     return;
   }
 
-  return { ...user };
+  return { ...user, _id: user._id.toString() };
 };
 
 export const updateAvatar = async (file) => {
