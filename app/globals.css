@@ -91,3 +91,7 @@ div[data-name="nextstep-pointer"] {
 div[data-name="nextstep-overlay"] {
   z-index: 99999999999999999999 !important;
 }
+.react-colorful__pointer {
+  width: 18px !important;
+  height: 18px !important;
+}

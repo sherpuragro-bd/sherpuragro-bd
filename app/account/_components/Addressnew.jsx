@@ -7,7 +7,7 @@ import { districtsData } from "@/public/data/District";
 import { upazilasData } from "@/public/data/Upazila";
 import { useForm } from "react-hook-form";
 import LineErro from "@/app/components/ui/LineErro";
-import { newAddress, revalidateAddresses } from "@/actions/user";
+import { newAddress } from "@/actions/user";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import AddressNewLoading from "../(pages)/addresses/new/loading";
@@ -97,7 +97,6 @@ export default function AddressNew() {
       toast.error(res.error);
       return;
     }
-    await revalidateAddresses();
     router.push("/account/addresses");
     router.refresh();
     toast.success(res.msg);
@@ -112,7 +111,7 @@ export default function AddressNew() {
       <Banner />
       <form
         onSubmit={handleSubmit(handelNewAddress)}
-        className="p-10 space-y-5 pb-14 mt-5 rounded-xl border"
+        className="space-y-5 pb-14 mt-5 rounded-xl"
       >
         <div className="flex flex-wrap sm:flex-nowrap w-full gap-5">
           <div className="w-full">

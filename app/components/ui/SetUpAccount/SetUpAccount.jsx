@@ -14,7 +14,7 @@ import { Input, InputPass } from "../Input";
 import { PhoneInput } from "../PhoneInput";
 import { useForm } from "react-hook-form";
 import LineErro from "../LineErro";
-import { registerUser } from "@/actions/auth";
+import { registerUser } from "@/actions/auth/auth";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useNextStep } from "nextstepjs";

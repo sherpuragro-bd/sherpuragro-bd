@@ -24,7 +24,9 @@ export default async function Layout({ children }) {
       <AppSidebar user={user} />
       <SidebarInset>
         <AdminHeader />
-        <div className="p-5">{children}</div>
+        <div className="w-full flex justify-center">
+          <div className="w-full p-5 md:max-w-[1440px] md:p-10">{children}</div>
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

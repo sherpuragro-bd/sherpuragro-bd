@@ -18,7 +18,7 @@ import {
   User,
   UserPlus,
 } from "lucide-react";
-import { logoutUser } from "@/actions/login";
+import { logoutUser } from "@/actions/auth/login";
 
 export default function IconTray({ user, avatar, userData }) {
   return (

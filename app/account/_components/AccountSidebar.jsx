@@ -2,7 +2,7 @@
 
 import { House, LogOut, MapPin, Settings, ShoppingBasket } from "lucide-react";
 import { SidebarLinks } from "./SidebarLink";
-import { logoutUser } from "@/actions/login";
+import { logoutUser } from "@/actions/auth/login";
 
 export default function AccountSidebar() {
   return (

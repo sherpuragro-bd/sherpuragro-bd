@@ -1,6 +1,6 @@
 "use client";
 
-import { sendOtp, verifyAccount } from "@/actions/auth";
+import { sendOtp, verifyAccount } from "@/actions/auth/auth";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import OtpSVGURI from "../../../public/img/otp.svg";

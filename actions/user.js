@@ -83,7 +83,7 @@ export const updateUser = async (update) => {
     return { success: false, error: "ব্যবহারকারী খুঁজে পাওয়া যায়নি।" };
   }
 
-  return { success: true, user };
+  return { success: true };
 };
 
 export const GetAllAddress = async () => {
@@ -92,24 +92,16 @@ export const GetAllAddress = async () => {
     return "কোন ইউজার খুঁজে পাওয়া যাইনি";
   }
 
-  return getCachedAddresses(session.user.email);
+  await connectToDB();
+  const allAddress = await AddressModel.find({ author: session.user.email })
+    .sort({ createdAt: -1 })
+    .lean();
+
+  return allAddress.map((address) => ({
+    ...address,
+    _id: address._id.toString(),
+  }));
 };
-
-const getCachedAddresses = unstable_cache(
-  async (email) => {
-    await connectToDB();
-    const allAddress = await AddressModel.find({ author: email })
-      .sort({ createdAt: -1 })
-      .lean();
-
-    return allAddress.map((address) => ({
-      ...address,
-      _id: address._id.toString(),
-    }));
-  },
-  (email) => [`addresses`],
-  { revalidate: 1 }
-);
 
 export const revalidateAddresses = async () => {
   revalidateTag(`addresses`);

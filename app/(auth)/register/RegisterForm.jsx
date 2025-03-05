@@ -1,6 +1,6 @@
 "use client";
 
-import { registerUser } from "@/actions/auth";
+import { registerUser } from "@/actions/auth/auth";
 import { Input, InputPass } from "@/app/components/ui/Input";
 import LineErro from "@/app/components/ui/LineErro";
 import SocialLogin from "@/app/components/ui/SocialLogin";

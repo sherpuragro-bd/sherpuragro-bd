@@ -1,6 +1,6 @@
 "use client";
 
-import { socialSignIn } from "@/actions/socialSignIn";
+import { socialSignIn } from "@/actions/auth/socialSignIn";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 

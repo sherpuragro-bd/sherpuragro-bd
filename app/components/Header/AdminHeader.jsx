@@ -7,7 +7,7 @@ export default function AdminHeader() {
     <>
       <header className="w-full h-12 py-2 px-5 border-b flex items-center justify-between">
         <div>
-          <SidebarTrigger />
+          <SidebarTrigger className="md:hidden" />
         </div>
         <div className="flex items-center gap-5">
           <Link href={`/`}>

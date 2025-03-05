@@ -5,9 +5,20 @@ import React, { forwardRef, useState } from "react";
 
 export const Input = forwardRef(
   (
-    { icon, required, className, childrenClass, label, children, ...props },
+    {
+      icon,
+      required,
+      className,
+      childrenClass,
+      label,
+      children,
+      inputType = "input",
+      ...props
+    },
     ref
   ) => {
+    const Component = inputType;
+
     return (
       <div className="flex flex-col gap-2 w-full">
         {label && (
@@ -16,7 +27,7 @@ export const Input = forwardRef(
             {required && <span className="text-orange-600 text-sm">*</span>}
           </label>
         )}
-        <input
+        <Component
           className={`px-5 font-extralight rounded-md py-[6px] pl-9 focus:bg-neutral-300/20 placeholder:font-extralight border border-gray-300/50 focus:border-primary/50 transition-all bg-white/80 ${className}`}
           ref={ref}
           {...props}

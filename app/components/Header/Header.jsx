@@ -7,6 +7,10 @@ import SmLogoURI from "../../../public/img/small-logo.png";
 import Image from "next/image";
 import { getUser } from "@/actions/user";
 import { Button } from "@/components/ui/button";
+import BrowserAllCetegories from "./BrowserCategories/BrowserAllCetegories";
+import { HeaderData } from "@/data/Header";
+import { convertToBengaliNumbers } from "@/lib/utils";
+import { Headset } from "lucide-react";
 
 export default async function Header() {
   const session = await getServerSession();
@@ -41,7 +45,7 @@ export default async function Header() {
           </Link>
         </section>
       )}
-      <header className="flex justify-center border-b z-[999] bg-white relative">
+      <header className="flex justify-center items-center border-b z-[999] bg-white relative flex-col w-full">
         <div className="w-full items-center gap-5 max-w-primary p-5 py-6 inline-flex justify-between">
           <div className="flex items-center gap-10 xl:gap-20 w-full">
             <Link href="/" className="text-3xl">
@@ -65,6 +69,20 @@ export default async function Header() {
             avatar={user?.image}
             user={session?.user}
           />
+        </div>
+        <div className="border-t hidden justify-center w-full py-2 md:flex">
+          <div className="max-w-primary w-full flex px-5 justify-between">
+            <BrowserAllCetegories />
+            <div className="flex items-center gap-3">
+              <Headset size={30} />
+              <div>
+                <h2 className="text-primary text-xl">
+                  {convertToBengaliNumbers(HeaderData.headerPhone.phone)}
+                </h2>
+                <p className="text-sm -mt-1">২৪ ঘণ্টা সাপোর্ট</p>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
     </>
