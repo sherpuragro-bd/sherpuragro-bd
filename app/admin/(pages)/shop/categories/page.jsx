@@ -44,7 +44,6 @@ export default function Page() {
   const [windowLoaded, setWindowLoaded] = useState(false);
   const [updateItem, setupdateItem] = useState();
   const [color, setColor] = useState();
-  console.log(color);
   const {
     register,
     handleSubmit,

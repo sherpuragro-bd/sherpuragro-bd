@@ -8,7 +8,7 @@ export async function NewAddressesMiddleware(req) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const res = await fetch(
-      new URL(`/api/addressescount?user=${token.email}`, req.url),
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/addressescount?user=${token.email}`,
       {
         method: "GET",
         headers: {

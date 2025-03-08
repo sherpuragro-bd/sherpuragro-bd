@@ -1,6 +1,8 @@
 import { LinkHighLight } from "@/app/components/ui/LinkHighLight";
 import AvatarServer from "./AvatarServer";
 import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import UserName from "./UserName";
 
 export default async function Profile() {
   return (
@@ -8,12 +10,28 @@ export default async function Profile() {
       <div className="flex w-full p-5">
         <div className="flex gap-5 max-[450px]:flex-col min-[450px]:items-center">
           <div className="min-w-[80px]">
-            <Suspense fallback={<>Loading</>}>
+            <Suspense
+              fallback={
+                <>
+                  <Skeleton
+                    className={`w-20 h-20 rounded-full ring-4 ring-primary/60`}
+                  />
+                </>
+              }
+            >
               <AvatarServer />
             </Suspense>
           </div>
           <div className="w-11/12">
-            {/* <h2 className="text-xl">{user?.name || session?.user.name}</h2> */}
+            <Suspense
+              fallback={
+                <>
+                  <Skeleton className={`h-[24px] w-40`} />
+                </>
+              }
+            >
+              <UserName />
+            </Suspense>
             <p className="font-extralight text-sm pt-1">
               আপনার অ্যাকাউন্ট ড্যাশবোর্ড থেকে আপনি আপনার{" "}
               <LinkHighLight href={`/account/orders?sort=recent`}>

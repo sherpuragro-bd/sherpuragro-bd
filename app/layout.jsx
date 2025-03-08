@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
         id="body"
         className={`${liAdorNoirrit.className} antialiased text-1 bg-white [&::-webkit-scrollbar]:w-0`}
         data-gr-ext-installed=""
-        data-new-gr-c-s-check-loaded="14.1224.0"
+        data-new-gr-c-s-check-loaded="14.1226.0"
       >
         <HideWrapper toHide={`/admin`}>
           <Header />

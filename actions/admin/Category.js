@@ -22,26 +22,22 @@ export const newCategoryAction = async (data) => {
   }
 };
 
-export const getAllCategories = unstable_cache(
-  async () => {
-    try {
-      await connectToDB();
-      const allCategories = await CategoryModel.find({ publicity: "public" })
-        .lean()
-        .select("-descriptionCategory -publicity -seoDescription -seoTitle");
+export const getAllCategories = async () => {
+  try {
+    await connectToDB();
+    const allCategories = await CategoryModel.find({ publicity: "public" })
+      .lean()
+      .select("-descriptionCategory -publicity -seoDescription -seoTitle");
 
-      return await replaceMongoIdInArray(
-        allCategories?.sort(
-          (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity)
-        )
-      );
-    } catch (err) {
-      return errorHandeler();
-    }
-  },
-  ["categories"],
-  { revalidate: 3600 }
-);
+    return await replaceMongoIdInArray(
+      allCategories?.sort(
+        (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity)
+      )
+    );
+  } catch (err) {
+    return errorHandeler();
+  }
+};
 
 export const bultUpdateCategory = async (payload) => {
   try {

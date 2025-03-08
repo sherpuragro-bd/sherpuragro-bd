@@ -8,6 +8,7 @@ export const Input = forwardRef(
     {
       icon,
       required,
+      defaultValue,
       className,
       childrenClass,
       label,
@@ -28,6 +29,7 @@ export const Input = forwardRef(
           </label>
         )}
         <Component
+          defaultValue={defaultValue}
           className={`px-5 font-extralight rounded-md py-[6px] pl-9 focus:bg-neutral-300/20 placeholder:font-extralight border border-gray-300/50 focus:border-primary/50 transition-all bg-white/80 ${className}`}
           ref={ref}
           {...props}
@@ -40,7 +42,7 @@ export const Input = forwardRef(
 );
 
 export const InputPass = forwardRef(
-  ({ icon, required, label, children, ...props }, ref) => {
+  ({ icon, required, defaultValue, label, children, ...props }, ref) => {
     const [isPasswordOpen, setisPasswordOpen] = useState(false);
 
     return (
@@ -52,6 +54,7 @@ export const InputPass = forwardRef(
           </label>
         )}
         <input
+          defaultValue={defaultValue}
           type={!isPasswordOpen ? "password" : "text"}
           className="px-5 font-extralight rounded-md py-[6px] pl-9 focus:bg-neutral-300/20 placeholder:font-extralight border border-gray-300/50 focus:border-primary/50 transition-all bg-white/80"
           ref={ref}
