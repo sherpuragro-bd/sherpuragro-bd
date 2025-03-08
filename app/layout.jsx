@@ -7,6 +7,7 @@ import ScrollToTop from "./components/ui/ScrolltoTop";
 import BottomBar from "./components/Header/BottomBar";
 import StepProvider from "./components/ui/StepProvider";
 import HideWrapper from "./components/ui/HideWrapper";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const liAdorNoirrit = localFont({
   src: "../public/fonts/adornoirit.ttf",
@@ -35,7 +36,9 @@ export default function RootLayout({ children }) {
         <HideWrapper toHide={`/admin`}>
           <Header />
         </HideWrapper>
-        <StepProvider>{children}</StepProvider>
+        <StepProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </StepProvider>
         <Toaster
           position="left-bottom"
           toastOptions={{

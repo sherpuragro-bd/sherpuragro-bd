@@ -2,7 +2,9 @@
 
 import { connectToDB } from "@/lib/connectToDB";
 import { uploadImage } from "@/lib/upload";
+import { errorHandeler } from "@/lib/utils";
 import { AddressModel } from "@/models/address.model";
+import { NewsletterModel } from "@/models/newsletter.model";
 import { userModel } from "@/models/user.model";
 import { getServerSession } from "next-auth";
 import { revalidateTag, unstable_cache } from "next/cache";
@@ -139,4 +141,22 @@ export const deleteAddress = async (addressId, author) => {
   await connectToDB();
   const deleteAddress = await AddressModel.findByIdAndDelete(addressId);
   return { success: true, msg: "ঠিকানাটি সফল ভাবে ডিলিট হয়েছে" };
+};
+
+export const newsletterSubscribeAction = async (email) => {
+  try {
+    await connectToDB();
+    const existEmail = await NewsletterModel.findOne({ email: email });
+
+    if (existEmail) {
+      return { success: false, error: "ইমেইল ইতিমধ্যে সাবস্ক্রাইবড রয়ছে" };
+    }
+
+    const newUser = new NewsletterModel({ email: email });
+    const user = await newUser.save();
+
+    return { success: true, msg: "আপনার ইমেইল সাবস্ক্রাইব সফল হয়েছে" };
+  } catch (err) {
+    errorHandeler();
+  }
 };

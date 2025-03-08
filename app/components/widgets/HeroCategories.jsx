@@ -30,7 +30,7 @@ export default function HeroCategories() {
   }, []);
 
   return (
-    <div className="w-44 border flex justify-center text-text/80 flex-col gap-3 border-primary/40 font-normal p-5 rounded-xl">
+    <div className="w-52 max-[1008px]:hidden flex border  justify-center text-text/80 flex-col gap-3 border-primary/40 font-normal p-5 rounded-xl">
       {allCategories.length > 0
         ? allCategories?.slice(0, expand).map((category) => (
             <Link
@@ -41,7 +41,7 @@ export default function HeroCategories() {
               {category?.nameCategory}
             </Link>
           ))
-        : Array.from({ length: 11 }).map((_, index) => (
+        : Array.from({ length: 12 }).map((_, index) => (
             <Skeleton key={index} className="w-full h-6" />
           ))}
       {allCategories.length > 11 && (
