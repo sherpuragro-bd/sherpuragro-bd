@@ -3,7 +3,6 @@
 import { registerUser } from "@/actions/auth/auth";
 import { Input, InputPass } from "@/app/components/ui/Input";
 import LineErro from "@/app/components/ui/LineErro";
-import NewLink from "@/app/components/ui/NewLink";
 import SocialLogin from "@/app/components/ui/SocialLogin";
 import { Loader2, Lock, Mail, MoveRight, User, UserPlus } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -188,9 +187,9 @@ export default function RegisterForm() {
       <br />
       <p className="font-extralight text-center text-neutral-500/70 w-full">
         ইতিমধ্যে আপনার অ্যাকাউন্ট রয়েছে?{" "}
-        <NewLink href={`/login`} className="text-primary underline">
+        <Link href={`/login`} className="text-primary underline">
           লগইন করুন
-        </NewLink>
+        </Link>
       </p>
       <br />
       <hr />

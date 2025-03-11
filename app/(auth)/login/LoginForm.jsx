@@ -3,7 +3,6 @@
 import { loginUser } from "@/actions/auth/login";
 import { Input, InputPass } from "@/app/components/ui/Input";
 import LineErro from "@/app/components/ui/LineErro";
-import NewLink from "@/app/components/ui/NewLink";
 import SocialLogin from "@/app/components/ui/SocialLogin";
 import { Loader2, Lock, LockIcon, Mail, MoveRight } from "lucide-react";
 import Link from "next/link";
@@ -116,9 +115,9 @@ export default function LoginForm() {
       <br />
       <p className="font-extralight text-center text-neutral-500/70 w-full">
         আপনার কোনো অ্যাকাউন্ট নেই ?{" "}
-        <NewLink href={`/register`} className="text-primary underline">
+        <Link href={`/register`} className="text-primary underline">
           রেজিস্ট্রেশন করুন
-        </NewLink>
+        </Link>
       </p>
       <br />
       <hr />

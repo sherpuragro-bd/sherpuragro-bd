@@ -7,8 +7,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CircleMinus, LayoutGrid, Plus } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import NewLink from "../../ui/NewLink";
 
 export default function BrowserAllCetegories() {
   const [allCategoriesData, setallCategoriesData] = useState();
@@ -37,13 +37,13 @@ export default function BrowserAllCetegories() {
           <div className="grid grid-cols-2 gap-4 p-3 w-full">
             {allCategoriesData
               ? allCategoriesData?.slice(0, expand).map((category, index) => (
-                  <NewLink
+                  <Link
                     key={`categories-${index}`}
                     className="px-5 hover:border-primary/80 transition-all py-2 border rounded-lg"
                     href={`/categories/${category.permalLink}`}
                   >
                     {category.nameCategory}
-                  </NewLink>
+                  </Link>
                 ))
               : "loading"}
           </div>
