@@ -1,6 +1,7 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Globe } from "lucide-react";
 import Link from "next/link";
+import NewLink from "../ui/NewLink";
 
 export default function AdminHeader() {
   return (
@@ -10,7 +11,7 @@ export default function AdminHeader() {
           <SidebarTrigger className="md:hidden" />
         </div>
         <div className="flex items-center gap-5">
-          <Link href={`/`}>
+          <NewLink href={`/`}>
             <button className="flex items-center group gap-2 border border-adminBg py-1 px-3 rounded-lg text-sm">
               <Globe
                 className="group-hover:animate-spin"
@@ -19,7 +20,7 @@ export default function AdminHeader() {
               />
               ভিজিট করুন
             </button>
-          </Link>
+          </NewLink>
         </div>
       </header>
     </>

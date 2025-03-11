@@ -1,6 +1,7 @@
 "use client";
 
 import { logoutUser } from "@/actions/auth/login";
+import NewLink from "@/app/components/ui/NewLink";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   SidebarMenu,
@@ -18,7 +19,7 @@ export function NavUser({ user }) {
           size="lg"
           className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:!text-current"
         >
-          <Link className="flex gap-2 items-center" href={`./admin/profile`}>
+          <NewLink className="flex gap-2 items-center" href={`./admin/profile`}>
             <Avatar className="h-8 w-8 rounded-lg ring-2 ring-primary/50">
               <AvatarImage
                 src={
@@ -37,7 +38,7 @@ export function NavUser({ user }) {
               <span className="truncate font-medium">{user.name}</span>
               <span className="truncate text-xs font-light">{user.email}</span>
             </div>
-          </Link>
+          </NewLink>
           <div onClick={async () => await logoutUser()}>
             <LogOut
               size={30}

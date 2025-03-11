@@ -3,6 +3,7 @@ import { ChevronRight, CirclePlus, Trash, XCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { AddressCard } from "./AddressCard";
+import NewLink from "@/app/components/ui/NewLink";
 
 export const metadata = {
   title: "আপনার সকল ঠিকানা",
@@ -15,7 +16,7 @@ export default async function Addresses() {
     <>
       {allAddress && allAddress?.length > 0 ? (
         <div className="grid grid-cols-1 min-[500px]:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
-          <Link
+          <NewLink
             href={addressCounts >= 3 ? "" : `/account/addresses/new`}
             className={` gap-5 flex-wrap font-light flex items-center p-5 py-3 justify-center  rounded-xl border border-dashed${
               addressCounts >= 3
@@ -36,7 +37,7 @@ export default async function Addresses() {
                 </>
               )}
             </div>
-          </Link>
+          </NewLink>
           {allAddress.map((address, index) => (
             <AddressCard key={`address-${index}`} address={address} />
           ))}
@@ -54,12 +55,12 @@ const NoAddress = () => {
       <Image width={300} height={300} src="/img/map.webp" alt="Map" />
       <h2 className="text-2xl">কোন ঠিকানা নেই!</h2>
       <p className="text-neutral-500">আপনি এখনও কোনও ঠিকানা যোগ করেননি।</p>
-      <Link
+      <NewLink
         href={`/account/addresses/new`}
         className="flex text-text/60 transition-all hover:underline items-center rounded-md"
       >
         নতুন ঠিকানা যোগ করুন <ChevronRight size={20} />
-      </Link>
+      </NewLink>
     </div>
   );
 };

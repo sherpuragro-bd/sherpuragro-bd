@@ -11,15 +11,17 @@ import BrowserAllCetegories from "./BrowserCategories/BrowserAllCetegories";
 import { HeaderData } from "@/data/Header";
 import { convertToBengaliNumbers } from "@/lib/utils";
 import { Headset } from "lucide-react";
+import NewLink from "../ui/NewLink";
 
 export default async function Header() {
   const session = await getServerSession();
   const user = await getUser();
+
   return (
     <>
       {user?.role === "admin" && (
         <section className="w-full py-1 bg-adminBg items-center px-5 flex justify-between">
-          <Link className="flex" href={`/admin`}>
+          <NewLink className="flex" href={`/admin`}>
             <Image
               width={40}
               className="max-[350px]:hidden scale-75"
@@ -33,22 +35,22 @@ export default async function Header() {
                 <span className="font-extralight text-xl underline">এডমিন</span>
               </span>
             </span>
-          </Link>
+          </NewLink>
           <p className="text-white/80 font-extralight max-[800px]:hidden">
             আপনি শেরপুর এগ্রো এডমিন একসেস রয়েছে আপনি ছাইলে এডমিন প্যানেল এ জেতে
             পারেন
           </p>
-          <Link href={`/admin`}>
+          <NewLink href={`/admin`}>
             <Button className="bg-white text-black h-7 hover:bg-primary">
               এডমিন
             </Button>
-          </Link>
+          </NewLink>
         </section>
       )}
       <header className="flex justify-center items-center border-b z-[999] bg-white relative flex-col w-full">
         <div className="w-full items-center gap-5 max-w-primary p-5 py-6 inline-flex justify-between">
           <div className="flex items-center gap-10 xl:gap-20 w-full">
-            <Link href="/" className="text-3xl">
+            <NewLink href="/" className="text-3xl">
               <Image
                 width={180}
                 src={LogoURI}
@@ -61,7 +63,7 @@ export default async function Header() {
                 className="min-[350px]:hidden"
                 alt="Sherpur Agro Logo"
               />
-            </Link>
+            </NewLink>
             <Search />
           </div>
           <IconTray

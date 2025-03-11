@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import SubscribeNewsletter from "../ui/SubscribeNewsletter";
+import NewLink from "../ui/NewLink";
 
 export default function HomeSlider() {
   const [allSlides, setAllSlides] = useState();
@@ -91,12 +92,12 @@ export default function HomeSlider() {
                 }}
               />
               {slider.bannerBtnName ? (
-                <Link
-                  className="px-8 py-2 mt-10 flex bg-gradient-to-br from-primary to-primary/90 border border-primary w-fit text-white transition-all hover:rounded-[200px] font-extralight rounded-md"
+                <NewLink
+                  className="px-8 py-2 mt-10 flex bg-gradient-to-br duration-500 from-primary to-primary/90 border-r ease-in-out border-primary w-fit text-white transition-all hover:rounded-[200px] font-extralight rounded-[4px]"
                   href={slider.bannerBtnLink}
                 >
                   {slider.bannerBtnName}
-                </Link>
+                </NewLink>
               ) : (
                 <SubscribeNewsletter />
               )}

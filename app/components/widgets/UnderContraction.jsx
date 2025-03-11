@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { convertToBengaliNumbers } from "@/lib/utils";
 import Br from "../ui/Br";
 import { LinkHighLight } from "../ui/LinkHighLight";
+import NewLink from "../ui/NewLink";
 
 export default function UnderConstraction() {
   const targetTime = new Date("2025-04-04T18:00:00").getTime();
@@ -56,12 +57,12 @@ export default function UnderConstraction() {
               স্বাগতম। আমাদের ওয়েবসাইট এর কাজ চলমান রয়েছে ।<Br /> ইনশাআল্লাহ
               আগামি মাসের মধ্যে আমাদের কাজ সম্পূর্ণ হবে, ততক্ষণ <Br /> আপনি
               আমাদের{" "}
-              <Link
+              <NewLink
                 className="text-blue-600 hover:underline"
                 href="https://www.facebook.com/sherpuragrobd"
               >
                 ফেসবুক পেজ{" "}
-              </Link>{" "}
+              </NewLink>{" "}
               ফলো করতে পারেন । ধন্যবাদ
             </h2>
             <div className="text-xl justify-center text-center mt-5 flex flex-wrap items-center gap-5 ">

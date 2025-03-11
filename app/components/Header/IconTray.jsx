@@ -19,6 +19,7 @@ import {
   UserPlus,
 } from "lucide-react";
 import { logoutUser } from "@/actions/auth/login";
+import NewLink from "../ui/NewLink";
 
 export default function IconTray({ user, avatar, userData }) {
   return (
@@ -34,7 +35,7 @@ export default function IconTray({ user, avatar, userData }) {
 
 const Compare = ({ count = 0 }) => {
   return (
-    <Link href={"/compare"} className="flex items-end gap-2">
+    <NewLink href={"/compare"} className="flex items-end gap-2">
       <div>
         <span className="font-en bg-primary text-white scale-75 font-medium p-1 -mb-3 translate-x-2 justify-center items-center flex rounded-full text-sm">
           {count}
@@ -58,13 +59,13 @@ const Compare = ({ count = 0 }) => {
         </svg>
       </div>
       <span className="font-light hidden sm:block">তুলনা</span>
-    </Link>
+    </NewLink>
   );
 };
 
 export const Cart = ({ count = 0 }) => {
   return (
-    <Link href={"/cart"} className="flex items-end gap-2">
+    <NewLink href={"/cart"} className="flex items-end gap-2">
       <div>
         <span className="font-en bg-primary z-10 relative text-white scale-75 font-medium p-1 -mb-3 translate-x-2 justify-center items-center flex rounded-full text-sm">
           {count}
@@ -72,7 +73,7 @@ export const Cart = ({ count = 0 }) => {
         <PiShoppingCartThin className="opacity-60" size={28} />
       </div>
       <span className="font-light hidden sm:block">কার্ট</span>
-    </Link>
+    </NewLink>
   );
 };
 
@@ -118,25 +119,25 @@ const Account = ({ user, avatar, userData }) => {
           {user ? (
             <>
               {userData?.role === "admin" && (
-                <Link href={`/admin`} className="flex gap-3 hover:underline">
+                <NewLink href={`/admin`} className="flex gap-3 hover:underline">
                   <Table2 size={20} strokeWidth={1} /> এডমিন প্যানেল
-                </Link>
+                </NewLink>
               )}
-              <Link href={`/account`} className="flex gap-3 hover:underline">
+              <NewLink href={`/account`} className="flex gap-3 hover:underline">
                 <User size={20} strokeWidth={1} /> অ্যাকাউন্ট
-              </Link>
-              <Link
+              </NewLink>
+              <NewLink
                 href={`/order-tracking`}
                 className="flex gap-3 hover:underline"
               >
                 <MapPin size={18} strokeWidth={0.8} /> অর্ডার ট্র্যাকিং
-              </Link>
-              <Link
+              </NewLink>
+              <NewLink
                 href={`/account/edit-account`}
                 className="flex gap-3 hover:underline"
               >
                 <SlidersHorizontal size={18} strokeWidth={0.8} /> আপডেট প্রোফাইল
-              </Link>
+              </NewLink>
               <button
                 onClick={async () => await logoutUser()}
                 className="flex gap-3 hover:underline"
@@ -147,13 +148,16 @@ const Account = ({ user, avatar, userData }) => {
             </>
           ) : (
             <>
-              <Link href={`/login`} className="flex gap-3 hover:underline">
+              <NewLink href={`/login`} className="flex gap-3 hover:underline">
                 <LogIn size={20} strokeWidth={1} /> লগইন
-              </Link>
-              <Link className="flex gap-3 hover:underline" href={`/register`}>
+              </NewLink>
+              <NewLink
+                className="flex gap-3 hover:underline"
+                href={`/register`}
+              >
                 <UserPlus size={20} strokeWidth={1} />
                 রেজিস্ট্রেশন
-              </Link>
+              </NewLink>
             </>
           )}
         </PopoverContent>

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import NewLink from "@/app/components/ui/NewLink";
 import { usePathname } from "next/navigation";
 import { forwardRef } from "react";
 
@@ -9,7 +9,7 @@ export const SidebarLinks = forwardRef(
     const pathname = usePathname();
     const isActive = pathname === link;
     return (
-      <Link
+      <NewLink
         {...props}
         ref={ref}
         href={`${link}`}
@@ -21,7 +21,7 @@ export const SidebarLinks = forwardRef(
         <span className={`font-normal ${isActive ? "!text-white" : ""}`}>
           {children}
         </span>
-      </Link>
+      </NewLink>
     );
   }
 );

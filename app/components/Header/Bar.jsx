@@ -7,6 +7,7 @@ import { PiShoppingCartThin } from "react-icons/pi";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import { CiUser } from "react-icons/ci";
+import NewLink from "../ui/NewLink";
 
 export default function Bar({ user, session }) {
   const pathname = usePathname();
@@ -42,7 +43,7 @@ export default function Bar({ user, session }) {
           </span>
           <span className="max-[350px]:hidden">সার্চ</span>
         </button>
-        <Link
+        <NewLink
           href={"/account" || `/`}
           className={`flex flex-col justify-center rounded items-center gap-1 p-3  ${
             pathname === "/account" ? "text-primary transition-all" : ""
@@ -64,7 +65,7 @@ export default function Bar({ user, session }) {
             <CiUser className="opacity-60" size={28} />
           )}
           <span className="max-[350px]:hidden">অ্যাকাউন্ট</span>
-        </Link>
+        </NewLink>
       </div>
     </>
   );
@@ -74,7 +75,7 @@ const IconBars = ({ href, icon, children }) => {
   const pathname = usePathname();
 
   return (
-    <Link
+    <NewLink
       href={href || `/`}
       className={`flex flex-col justify-center rounded items-center gap-1 p-3  ${
         href === pathname ? "text-primary transition-all" : ""
@@ -82,6 +83,6 @@ const IconBars = ({ href, icon, children }) => {
     >
       <span>{icon}</span>
       <span className="max-[350px]:hidden">{children}</span>
-    </Link>
+    </NewLink>
   );
 };

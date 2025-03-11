@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { CircleMinus, Plus } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import NewLink from "../ui/NewLink";
 
 export default function HeroCategories() {
   const [allCategories, setAllCategories] = useState([]);
@@ -33,13 +34,13 @@ export default function HeroCategories() {
     <div className="w-52 max-[1008px]:hidden flex border  justify-center text-text/80 flex-col gap-3 border-primary/40 font-normal p-5 rounded-xl">
       {allCategories.length > 0
         ? allCategories?.slice(0, expand).map((category) => (
-            <Link
+            <NewLink
               href={`/categories/${category.permalLink}`}
               className="hover:underline"
               key={`category-${category.id}`}
             >
               {category?.nameCategory}
-            </Link>
+            </NewLink>
           ))
         : Array.from({ length: 12 }).map((_, index) => (
             <Skeleton key={index} className="w-full h-6" />
