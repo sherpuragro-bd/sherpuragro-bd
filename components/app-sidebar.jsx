@@ -21,7 +21,6 @@ import Image from "next/image";
 import LogoURI from "../public/img/logo.png";
 import { usePathname } from "next/navigation";
 import { adminNavData } from "@/lib/utils";
-import NewLink from "@/app/components/ui/NewLink";
 
 export function AppSidebar({ user, ...props }) {
   const pathName = usePathname();
@@ -29,9 +28,9 @@ export function AppSidebar({ user, ...props }) {
   return (
     <Sidebar className="p-2" collapsible="icon" {...props}>
       <SidebarHeader className="pl-3">
-        <NewLink href={"/admin"}>
+        <Link href={"/admin"}>
           <Image width={130} src={LogoURI} alt="Sherpur Agro Logo" />
-        </NewLink>
+        </Link>
         <span className="flex h-[1px] w-full bg-slate-200" />
       </SidebarHeader>
       <SidebarContent>
@@ -48,10 +47,10 @@ export function AppSidebar({ user, ...props }) {
                 }`}
                 asChild
               >
-                <NewLink href={`/admin/${item.url}`} className={`font-normal`}>
+                <Link href={`/admin/${item.url}`} className={`font-normal`}>
                   {item.icon && <item.icon />}
                   {item.title}
-                </NewLink>
+                </Link>
               </SidebarMenuButton>
               {item.items?.length ? (
                 <SidebarMenuSub>
@@ -62,13 +61,13 @@ export function AppSidebar({ user, ...props }) {
                         asChild
                         isActive={item.isActive}
                       >
-                        <NewLink href={`/admin/${item.url}`}>
+                        <Link href={`/admin/${item.url}`}>
                           {" "}
                           {item.icon && (
                             <item.icon color="#253d4e" strokeWidth={1.5} />
                           )}
                           {item.title}
-                        </NewLink>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}
