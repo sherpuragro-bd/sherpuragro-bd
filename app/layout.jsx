@@ -9,6 +9,7 @@ import StepProvider from "./components/ui/StepProvider";
 import HideWrapper from "./components/ui/HideWrapper";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ReProgressProviders from "./context/ProgressProvider";
+import TanstackQuery from "./context/TanstackQuery";
 
 const liAdorNoirrit = localFont({
   src: "../public/fonts/adornoirit.ttf",
@@ -35,30 +36,32 @@ export default function RootLayout({ children }) {
         data-new-gr-c-s-check-loaded="14.1226.0"
       >
         <ReProgressProviders>
-          <HideWrapper toHide={`/admin`}>
-            <Header />
-          </HideWrapper>
-          <StepProvider>
-            <TooltipProvider>{children}</TooltipProvider>
-          </StepProvider>
-          <Toaster
-            position="left-bottom"
-            toastOptions={{
-              style: {
-                zIndex: "9999999999999999999999999 !important",
-              },
-              className: "!border !shadow-none !px-5",
-              success: {
-                iconTheme: {
-                  primary: "#3bb77e",
+          <TanstackQuery>
+            <HideWrapper toHide={`/admin`}>
+              <Header />
+            </HideWrapper>
+            <StepProvider>
+              <TooltipProvider>{children}</TooltipProvider>
+            </StepProvider>
+            <Toaster
+              position="center-bottom"
+              toastOptions={{
+                style: {
+                  zIndex: "9999999999999999999999999 !important",
                 },
-              },
-            }}
-          />
-          <ScrollToTop />
-          <HideWrapper toHide={`/admin`}>
-            <BottomBar />
-          </HideWrapper>
+                className: "!border !shadow-none !px-5",
+                success: {
+                  iconTheme: {
+                    primary: "#3bb77e",
+                  },
+                },
+              }}
+            />
+            <ScrollToTop />
+            <HideWrapper toHide={`/admin`}>
+              <BottomBar />
+            </HideWrapper>
+          </TanstackQuery>
         </ReProgressProviders>
       </body>
     </html>

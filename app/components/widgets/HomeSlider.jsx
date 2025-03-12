@@ -47,7 +47,7 @@ export default function HomeSlider() {
           effect={"fade"}
           pagination={{ clickable: true }}
           autoplay={{ delay: 3000 }}
-          className="flex w-full items-center m-0 scale-[1.001] group md:h-full transition-all min-h-[300px]"
+          className="flex w-full items-center m-0 scale-[1.001] group md:h-full transition-all min-h-[432px]"
           onMouseEnter={() => sliderRef.current.swiper.autoplay.stop()}
           onMouseLeave={() => sliderRef.current.swiper.autoplay.start()}
         >
@@ -77,7 +77,7 @@ export default function HomeSlider() {
               })}
             >
               <h2
-                className="text-4xl md:text-6xl"
+                className=" text-4xl min-[450px]:text-5xl w-full md:w-8/12 md:text-6xl"
                 style={{ color: slider.color }}
                 dangerouslySetInnerHTML={{
                   __html: slider.title,
@@ -118,7 +118,7 @@ export default function HomeSlider() {
           </div>
         </Swiper>
       ) : (
-        <div className="flex flex-col gap-10 justify-center w-full bg-gradient-to-br p-10 md:p-20 from-gray-200 to-gray-300">
+        <div className="flex flex-col gap-10 min-h-[432px] justify-center w-full bg-gradient-to-br p-10 md:p-20 from-gray-200 to-gray-300">
           <Skeleton className={`w-8/12 md:w-6/12 h-14`} />
           <div className="flex flex-col gap-3">
             <Skeleton className={`w-10/12 md:w-5/12 h-5`} />

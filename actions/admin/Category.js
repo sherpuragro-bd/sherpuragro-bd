@@ -7,12 +7,6 @@ import { errorHandeler, replaceMongoIdInArray } from "@/lib/utils";
 import { unstable_cache } from "next/cache";
 
 export const newCategoryAction = async (data) => {
-  const user = await getUser();
-
-  if (user?.role !== "admin") {
-    return "unauthorized user";
-  }
-
   try {
     const newCategoryObj = new CategoryModel(data);
     const newCategory = await newCategoryObj.save();
@@ -22,7 +16,7 @@ export const newCategoryAction = async (data) => {
   }
 };
 
-export const getAllCategories = async () => {
+export const getAllCategories = async (remove) => {
   try {
     await connectToDB();
     const allCategories = await CategoryModel.find({ publicity: "public" })
@@ -32,7 +26,8 @@ export const getAllCategories = async () => {
     return await replaceMongoIdInArray(
       allCategories?.sort(
         (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity)
-      )
+      ),
+      remove
     );
   } catch (err) {
     return errorHandeler();

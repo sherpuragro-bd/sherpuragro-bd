@@ -91,7 +91,7 @@ export default function Page() {
       ...data,
       publicity: publicity,
       color: JSON.stringify(color),
-      categoryImage,
+      categoryIconImage: categoryImage,
       seoImage,
       permalLink,
     };
@@ -344,6 +344,9 @@ export default function Page() {
                   htmlFor={"categoryImageUpload"}
                   label="ক্যাটাগরি ইমেজ"
                   onUpload={setcategoryImage}
+                  style={{
+                    backgroundColor: rgbaToHexWithAlpha(color || "white"),
+                  }}
                 />
               </div>
 

@@ -17,7 +17,9 @@ const ImageUpload = ({
   required,
   compressOption,
   htmlFor,
+  className,
   folder = "default",
+  ...props
 }) => {
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -67,8 +69,11 @@ const ImageUpload = ({
       />
       {label && <Label required={required || false}>{label}</Label>}
       <label
+        {...props}
         htmlFor={htmlFor}
-        className="relative flex flex-col items-center cursor-pointer border-2 border-dashed border-gray-300 p-3 rounded-lg w-40"
+        className={`relative flex flex-col items-center cursor-pointer border-2 border-dashed border-gray-300 p-3 rounded-lg w-40 ${
+          className || ""
+        }`}
       >
         {isUploading ? (
           <Loader2 size={50} strokeWidth={1} className="animate-spin my-5" />

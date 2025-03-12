@@ -35,7 +35,7 @@ const CategorySchema = new mongoose.Schema(
     seoDescription: {
       type: String,
     },
-    seoImageCategory: {
+    seoImage: {
       type: String,
     },
     order: Number,
