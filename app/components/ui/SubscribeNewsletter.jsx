@@ -27,25 +27,29 @@ export default function SubscribeNewsletter() {
   return (
     <form
       onSubmit={handelSubscribe}
-      className="mt-10 w-full md:w-8/12 min-[1000px]:w-6/12 pl-5 flex items-center gap-5 rounded-full overflow-hidden bg-white"
+      className="mt-10 w-full md:w-8/12 min-[1000px]:w-6/12  flex flex-col items-center justify-center rounded-full overflow-hidden bg-white"
     >
-      <Mail size={40} className="opacity-60" strokeWidth={1.4} />
       <input
         required
         name="email"
         type="email"
-        className="w-full py-3 placeholder:font-light font-light"
+        className="w-full py-3  pl-14 placeholder:font-light font-light"
         placeholder="আপনার ইমেইল লিখুন"
       />
-      <button className="px-8 py-3 rounded-full bg-gradient-to-br border-2 border-primary to-primary from-primary/60 text-white font-light">
-        {subscribing ? (
-          <>
-            <Loader2 className="animate-spin" />
-          </>
-        ) : (
-          "সাবস্ক্রাইব"
-        )}
-      </button>
+      <div className="w-full flex justify-between z-20">
+        <Mail size={20} className="opacity-60 -mt-8 ml-5" strokeWidth={1.4} />
+        <div className=" -mt-12 bg-white rounded-full">
+          <button className="px-8 py-3  rounded-full bg-gradient-to-br border-2 border-primary to-primary from-primary/60 text-white font-light">
+            {subscribing ? (
+              <>
+                <Loader2 className="animate-spin" />
+              </>
+            ) : (
+              "সাবস্ক্রাইব"
+            )}
+          </button>
+        </div>
+      </div>
     </form>
   );
 }

@@ -11,7 +11,7 @@ import { rgbaToHexWithAlpha } from "@/lib/utils";
 import LoadingPlaceholder from "../../../public/img/placeholder.png";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function HomeCategories() {
   const categorySliderRef = useRef();
@@ -69,8 +69,9 @@ export default function HomeCategories() {
           ref={categorySliderRef}
           className="mt-5"
           modules={[Autoplay, Navigation]}
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 1000 }}
           spaceBetween={20}
+          speed={1000}
           loop={true}
           slidesPerView={3}
           breakpoints={{

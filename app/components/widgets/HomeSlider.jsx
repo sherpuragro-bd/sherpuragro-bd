@@ -38,7 +38,7 @@ export default function HomeSlider() {
   };
 
   return (
-    <div className="min-[1008px]:w-[83%] flex m-0 overflow-hidden w-full border rounded-2xl">
+    <div className="min-[1008px]:w-[83%] flex m-0 overflow-hidden w-full border border-t-0 md:border-t md:rounded-2xl">
       {allSlides ? (
         <Swiper
           ref={sliderRef}
@@ -76,30 +76,32 @@ export default function HomeSlider() {
                 "data-desktop": slider.bannerDesk,
               })}
             >
-              <h2
-                className=" text-4xl min-[450px]:text-5xl w-full md:w-8/12 md:text-6xl"
-                style={{ color: slider.color }}
-                dangerouslySetInnerHTML={{
-                  __html: slider.title,
-                }}
-              />
-              <p
-                style={{ color: slider.color }}
-                className="mt-7 font-extralight w-full md:w-6/12 text-lg md:text-xl"
-                dangerouslySetInnerHTML={{
-                  __html: slider.content,
-                }}
-              />
-              {slider.bannerBtnName ? (
-                <Link
-                  className="px-8 py-2 mt-10 flex bg-gradient-to-br duration-500 from-primary to-primary/90 border-r ease-in-out border-primary w-fit text-white transition-all hover:rounded-[200px] font-extralight rounded-[4px]"
-                  href={slider.bannerBtnLink}
-                >
-                  {slider.bannerBtnName}
-                </Link>
-              ) : (
-                <SubscribeNewsletter />
-              )}
+              <Link href={`${slider.link || "#"}`}>
+                <h2
+                  className=" text-4xl min-[450px]:text-5xl w-full md:w-8/12 md:text-6xl"
+                  style={{ color: slider.color }}
+                  dangerouslySetInnerHTML={{
+                    __html: slider.title,
+                  }}
+                />
+                <p
+                  style={{ color: slider.color }}
+                  className="mt-7 font-extralight w-full md:w-6/12 text-lg md:text-xl"
+                  dangerouslySetInnerHTML={{
+                    __html: slider.content,
+                  }}
+                />
+                {slider.bannerBtnName ? (
+                  <Link
+                    className="px-8 py-2 mt-10 flex bg-gradient-to-br duration-500 from-primary to-primary/90 border-r ease-in-out border-primary w-fit text-white transition-all hover:rounded-[200px] font-extralight rounded-[4px]"
+                    href={slider.bannerBtnLink}
+                  >
+                    {slider.bannerBtnName}
+                  </Link>
+                ) : (
+                  <SubscribeNewsletter />
+                )}
+              </Link>
             </SwiperSlide>
           ))}
           <div className="bottom-[45%] px-5 max-[1000px]:!hidden md:flex opacity-0 group-hover:opacity-100 transition-all duration-[600] justify-between w-full absolute z-50">

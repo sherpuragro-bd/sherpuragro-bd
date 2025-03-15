@@ -8,9 +8,13 @@ import Image from "next/image";
 import { getUser } from "@/actions/user";
 import { Button } from "@/components/ui/button";
 import BrowserAllCetegories from "./BrowserCategories/BrowserAllCetegories";
-import { HeaderData } from "@/data/Header";
+import { HeaderData, HeaderDefaultNavs } from "@/data/Header";
 import { convertToBengaliNumbers } from "@/lib/utils";
-import { Headset } from "lucide-react";
+import { ChevronDown, Headset } from "lucide-react";
+import NavLink from "../ui/NavLink";
+import HeaderCategoryDropdown from "./HeaderCategoryDropdown";
+import { Suspense } from "react";
+import MobileDropdown from "./MobileDropdown";
 
 export default async function Header() {
   const session = await getServerSession();
@@ -65,22 +69,53 @@ export default async function Header() {
             </Link>
             <Search />
           </div>
-          <IconTray
-            userData={{ ...user, _id: `${user?._id}` }}
-            avatar={user?.image}
-            user={session?.user}
-          />
+          <div className="max-[460px]:hidden -mt-3 md:mt-0">
+            <IconTray
+              userData={{ ...user, _id: `${user?._id}` }}
+              avatar={user?.image}
+              user={session?.user}
+            />
+          </div>
+          <MobileDropdown className="md:hidden " />
         </div>
         <div className="border-t hidden justify-center w-full py-2 md:flex">
           <div className="max-w-primary w-full flex px-5 justify-between">
-            <BrowserAllCetegories />
-            <div className="flex items-center gap-3">
-              <Headset size={30} />
-              <div>
-                <h2 className="text-primary text-xl">
-                  {convertToBengaliNumbers(HeaderData.headerPhone.phone)}
-                </h2>
-                <p className="text-sm -mt-1">২৪ ঘণ্টা সাপোর্ট</p>
+            <div className="flex items-center gap-10">
+              <BrowserAllCetegories />
+              <ul className="hidden lg:flex items-center gap-10 ">
+                {HeaderDefaultNavs.map((nav, index) => (
+                  <li key={`nav-${index}`} className={`order-0`}>
+                    <NavLink
+                      className={`hover:text-primary hover:underline`}
+                      href={nav.path}
+                    >
+                      {nav.pathName}
+                    </NavLink>
+                  </li>
+                ))}
+                <li className="flex order-3 items-center gap-1 cursor-pointer group">
+                  ক্যাটেগরিস
+                  <ChevronDown
+                    className="group-hover:-rotate-180 transition-all"
+                    strokeWidth={1.5}
+                    size={20}
+                  />
+                  <Suspense fallback={<></>}>
+                    <HeaderCategoryDropdown />
+                  </Suspense>
+                </li>
+              </ul>
+            </div>
+            <div className="flex gap-5">
+              <MobileDropdown className="hidden md:flex lg:hidden" />
+              <div className="flex items-center gap-3">
+                <Headset size={30} />
+                <div>
+                  <h2 className="text-primary text-xl">
+                    {convertToBengaliNumbers(HeaderData.headerPhone.phone)}
+                  </h2>
+                  <p className="text-sm -mt-1">২৪ ঘণ্টা সাপোর্ট</p>
+                </div>
               </div>
             </div>
           </div>

@@ -107,12 +107,8 @@ export default function Sliders() {
                     disabled={isLoading}
                     {...register("link", {
                       required: "লিঙ্ক আবশ্যক",
-                      pattern: {
-                        value: /^https?:\/\/.+/i,
-                        message: "সঠিক লিঙ্ক দিন",
-                      },
                     })}
-                    type="url"
+                    type="text"
                     label="লিঙ্ক"
                     placeholder="https://"
                     className="!px-5"
