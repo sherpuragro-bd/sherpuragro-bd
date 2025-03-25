@@ -5,7 +5,7 @@ import { Loader2, Mail } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function SubscribeNewsletter() {
+export default function SubscribeNewsletter({ className = "" }) {
   const [subscribing, setsubscribing] = useState();
 
   const handelSubscribe = async (e) => {
@@ -27,7 +27,7 @@ export default function SubscribeNewsletter() {
   return (
     <form
       onSubmit={handelSubscribe}
-      className="mt-10 w-full md:w-8/12 min-[1000px]:w-6/12  flex flex-col items-center justify-center rounded-full overflow-hidden bg-white"
+      className={`mt-10 w-full md:w-8/12 min-[1000px]:w-6/12  flex flex-col items-center justify-center rounded-full overflow-hidden bg-white ${className}`}
     >
       <input
         required

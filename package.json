@@ -2,12 +2,14 @@
   "name": "sherpuragro",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+"scripts": {
+  "dev": "next dev --turbopack",
+  "netbuild": "npm i --force && next build",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+}
+,
   "dependencies": {
     "@bprogress/next": "^3.2.7",
     "@hello-pangea/dnd": "^18.0.1",

@@ -16,10 +16,10 @@ export const newCategoryAction = async (data) => {
   }
 };
 
-export const getAllCategories = async (remove) => {
+export const getAllCategories = async (remove, filter) => {
   try {
     await connectToDB();
-    const allCategories = await CategoryModel.find({ publicity: "public" })
+    const allCategories = await CategoryModel.find(filter)
       .lean()
       .select("-descriptionCategory -publicity -seoDescription -seoTitle");
 

@@ -10,6 +10,7 @@ import HideWrapper from "./components/ui/HideWrapper";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ReProgressProviders from "./context/ProgressProvider";
 import TanstackQuery from "./context/TanstackQuery";
+import Footer from "./components/Footer/Footer";
 
 const liAdorNoirrit = localFont({
   src: "../public/fonts/adornoirit.ttf",
@@ -33,7 +34,7 @@ export default function RootLayout({ children }) {
         id="body"
         className={`${liAdorNoirrit.className} antialiased text-1 bg-white [&::-webkit-scrollbar]:w-0`}
         data-gr-ext-installed=""
-        data-new-gr-c-s-check-loaded="14.1226.0"
+        data-new-gr-c-s-check-loaded="14.1228.0"
       >
         <ReProgressProviders>
           <TanstackQuery>
@@ -61,6 +62,7 @@ export default function RootLayout({ children }) {
             <HideWrapper toHide={`/admin`}>
               <BottomBar />
             </HideWrapper>
+            <Footer />
           </TanstackQuery>
         </ReProgressProviders>
       </body>

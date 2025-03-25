@@ -17,11 +17,12 @@ const ImageUpload = ({
   required,
   compressOption,
   htmlFor,
+  defaultImage,
   className,
   folder = "default",
   ...props
 }) => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(defaultImage || null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleImageUpload = async (e) => {

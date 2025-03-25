@@ -9,24 +9,28 @@ import { LinkHighLight } from "@/app/components/ui/LinkHighLight";
 import ColorPicker from "@/app/components/widgets/ColorPicker";
 import ImageUpload from "@/app/components/widgets/ImageUpload";
 import { Button } from "@/components/ui/button";
+import { verifyUrl } from "@/lib/verifyUrl";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Loader2 } from "lucide-react";
+import { set } from "mongoose";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import slugify from "slugify";
 
 export default function UpdateCategory({ id }) {
-  const [loading, setloading] = useState();
-  const [categoryData, setcategoryData] = useState();
-  const [allCategories, setallCategories] = useState();
+  const [categoryDes, setcategoryDes] = useState();
+  const [categoryName, setcategoryName] = useState();
   const [categoryImage, setcategoryImage] = useState("");
   const [seoImage, setseoImage] = useState("");
+  const [seoTitle, setseoTitle] = useState();
+  const [seoDes, setseoDes] = useState();
   const [publicity, setpublicity] = useState("public");
   const [capturedLink, setCapturedLink] = useState("");
   const [permalLink, setPermalLink] = useState("");
   const [debounceTimer, setDebounceTimer] = useState(null);
   const [windowLoaded, setWindowLoaded] = useState(false);
-  const [updateItem, setupdateItem] = useState();
   const [color, setColor] = useState();
+  const [loading, setloading] = useState();
 
   const {
     register,
@@ -62,15 +66,25 @@ export default function UpdateCategory({ id }) {
     setDebounceTimer(newTimer);
   };
 
-  const fetchCategoryData = async (id) => {
-    const res = await getSingleCategoryData(id);
+  const fetchCategoryData = async (cID) => {
+    const data = await getSingleCategoryData(cID);
     setloading(false);
-    setcategoryData(res);
+    setseoImage(data.seoImage);
+    setcategoryName(data.nameCategory);
+    setseoDes(data.seoDescription);
+    setseoTitle(data.seoTitle);
+    setcategoryImage(data.categoryIconImage);
+    setpublicity(data.publicity);
+    setColor(JSON.parse(data.color));
+    setcategoryDes(data.descriptionCategory);
+    setCapturedLink(data.permalLink);
+    setPermalLink(data.permalLink);
   };
 
   useEffect(() => {
     setloading(true);
     fetchCategoryData(id);
+    setWindowLoaded(true);
   }, [id]);
 
   return (
@@ -83,9 +97,8 @@ export default function UpdateCategory({ id }) {
         <>
           <form className="space-y-7">
             <Input
-              {...register("nameCategory", {
-                required: "ক্যাটাগরিস নাম আবশ্যক",
-              })}
+              value={categoryName}
+              onChange={(e) => setcategoryName(e.target.value)}
               maxLength="50"
               label="নাম"
               placeholder="ক্যাটাগরিস নাম"
@@ -106,13 +119,7 @@ export default function UpdateCategory({ id }) {
                 label="পেরমাল লিঙ্ক"
                 placeholder="ক্যাটাগরি পেরমাল লিঙ্ক"
                 className="!pl-5"
-              >
-                {errors.permalLink && (
-                  <LineErro className={`pt-5`}>
-                    {errors.permalLink.message}
-                  </LineErro>
-                )}
-              </Input>
+              ></Input>
               <p className="mt-4 font-light text-cyan-600">
                 প্রিভিউ:{" "}
                 <LinkHighLight
@@ -123,7 +130,8 @@ export default function UpdateCategory({ id }) {
             </div>
 
             <Input
-              {...register("descriptionCategory")}
+              value={categoryDes}
+              onChange={(e) => setcategoryDes(e.target.value)}
               maxLength="50"
               rows="4"
               inputType="textarea"
@@ -144,6 +152,7 @@ export default function UpdateCategory({ id }) {
                 onChange={setColor}
               />
               <ImageUpload
+                defaultImage={categoryImage}
                 folder="/categories/images"
                 htmlFor={"categoryImageUpload"}
                 label="ক্যাটাগরি ইমেজ"
@@ -155,13 +164,15 @@ export default function UpdateCategory({ id }) {
               <Label>সার্চ ইঞ্জিন</Label>
               <div className="flex gap-5 border p-5 flex-wrap">
                 <Input
-                  {...register("seoTitle")}
+                  value={seoTitle}
+                  onChange={(e) => setseoTitle(e.target.value)}
                   label="এসইও টাইটেল"
                   className="!pl-3"
                   placeholder="এসইও টাইটেল লিখুন"
                 />
                 <Input
-                  {...register("seoDescription")}
+                  value={seoDes}
+                  onChange={(e) => setseoDes(e.target.value)}
                   label="এসইও ডেসক্রিপশন "
                   inputType="textarea"
                   className="!pl-3"
@@ -175,6 +186,7 @@ export default function UpdateCategory({ id }) {
                   </Alert>
                 </div>
                 <ImageUpload
+                  defaultImage={seoImage}
                   folder="/categories/og"
                   htmlFor={"seoImageUpload"}
                   compressOption={{ maxSizeMB: 1, maxWidthOrHeight: 1000 }}

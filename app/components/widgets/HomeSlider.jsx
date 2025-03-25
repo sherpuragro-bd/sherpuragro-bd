@@ -65,7 +65,7 @@ export default function HomeSlider() {
                   ? `url(${slider.bannerMobile})`
                   : undefined,
               }}
-              className="bg-cover bg-center flex p-10 py-20 md:p-20"
+              className="bg-cover bg-center flex p-10 py-20 md:p-20 flex"
               {...(slider.bannerMobile && {
                 "data-mobile": slider.bannerMobile,
               })}
@@ -76,7 +76,7 @@ export default function HomeSlider() {
                 "data-desktop": slider.bannerDesk,
               })}
             >
-              <Link href={`${slider.link || "#"}`}>
+              <Link className="" href={`${slider.link || "#"}`}>
                 <h2
                   className=" text-4xl min-[450px]:text-5xl w-full md:w-8/12 md:text-6xl"
                   style={{ color: slider.color }}
@@ -91,33 +91,35 @@ export default function HomeSlider() {
                     __html: slider.content,
                   }}
                 />
-                {slider.bannerBtnName ? (
-                  <Link
-                    className="px-8 py-2 mt-10 flex bg-gradient-to-br duration-500 from-primary to-primary/90 border-r ease-in-out border-primary w-fit text-white transition-all hover:rounded-[200px] font-extralight rounded-[4px]"
-                    href={slider.bannerBtnLink}
-                  >
-                    {slider.bannerBtnName}
-                  </Link>
-                ) : (
-                  <SubscribeNewsletter />
-                )}
               </Link>
+              {slider.bannerBtnName ? (
+                <Link
+                  className="px-8 py-2 mt-10 flex bg-gradient-to-br duration-500 from-primary to-primary/90 border-r ease-in-out border-primary w-fit text-white transition-all hover:rounded-[200px] font-extralight rounded-[4px]"
+                  href={slider.bannerBtnLink}
+                >
+                  {slider.bannerBtnName}
+                </Link>
+              ) : (
+                <SubscribeNewsletter />
+              )}
             </SwiperSlide>
           ))}
-          <div className="bottom-[45%] px-5 max-[1000px]:!hidden md:flex opacity-0 group-hover:opacity-100 transition-all duration-[600] justify-between w-full absolute z-50">
-            <button
-              className="bg-neutral-100/80 backdrop-blur-2xl rounded-full hover:bg-primary transition-all hover:text-white hover:border-primary border-[0.5px] border-text/10 p-2 w-10 h-10"
-              onClick={handlePrev}
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              className="bg-neutral-100/80 backdrop-blur-2xl rounded-full hover:bg-primary transition-all hover:text-white hover:border-primary border-[0.5px] border-text/10 p-2 w-10 h-10"
-              onClick={handleNext}
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
+          {allSlides?.length > 1 && (
+            <div className="bottom-[45%] px-5 max-[1000px]:!hidden md:flex opacity-0 group-hover:opacity-100 transition-all duration-[600] justify-between w-full absolute z-50">
+              <button
+                className="bg-neutral-100/80 backdrop-blur-2xl rounded-full hover:bg-primary transition-all hover:text-white hover:border-primary border-[0.5px] border-text/10 p-2 w-10 h-10"
+                onClick={handlePrev}
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                className="bg-neutral-100/80 backdrop-blur-2xl rounded-full hover:bg-primary transition-all hover:text-white hover:border-primary border-[0.5px] border-text/10 p-2 w-10 h-10"
+                onClick={handleNext}
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
+          )}
         </Swiper>
       ) : (
         <div className="flex flex-col gap-10 min-h-[432px] justify-center w-full bg-gradient-to-br p-10 md:p-20 from-gray-200 to-gray-300">

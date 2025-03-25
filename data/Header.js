@@ -1,6 +1,6 @@
 export const HeaderData = {
   headerPhone: {
-    phone: "+880 1988-919950",
+    phone: "+880 1988919950",
   },
 };
 
